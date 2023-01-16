@@ -1,4 +1,21 @@
 {
     "Actor": {},
-    "Item": {}
+    "Item": {
+        "types":[
+            "weapon",
+            "armor"
+        ],
+        "weapon":{
+            "dice_damage":0,
+            "atk":0,
+            "def":0,
+            "runes_number":0
+        },
+        "armor":{
+            "dice_damage":0,
+            "atk":0,
+            "def":0,
+            "runes_number":0
+        }
+    }
 }
