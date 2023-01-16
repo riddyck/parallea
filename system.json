@@ -1,5 +1,5 @@
 {
-	"name": "parallea_fiches_foundry",
+	"name": "parallea",
 	"title": "Parallea",
 	"description": "Les plaintes sont à addresser au MJ.",
 	"version": "1.0.0",
@@ -10,7 +10,7 @@
 	"scripts": [
 	],
 	"esmodules": [
-	  "module/Parallea.js"
+	  "Parallea.js"
 	],
 	"styles": [
 	  "style/Parallea.css"
