@@ -1,26 +1,40 @@
 {
-	"name": "parallea",
+	"id": "parallea",
 	"title": "Parallea",
 	"description": "Les plaintes sont à addresser au MJ.",
 	"version": "1.0.0",
     "templateVersion": 1,
-    "authors": "Jogark",
-	"minimumCoreVersion": "10.291",
-	"compatibleCoreVersion": "10.291",
+	"compatibility": {
+		"minimum": "10.291",
+		"verified": "10.291"
+	},
+    "authors": [
+		{
+		  "name": "Jogark Tardek",
+		  "email": "t.l.1999@hotmail.fr"
+		}
+	],
 	"scripts": [
 	],
 	"esmodules": [
-	  "Parallea.js"
+	  "parallea.js"
 	],
 	"styles": [
-	  "style/Parallea.css"
+	  "style/parallea.css"
 	],
-	"packs": [
+	"languages":[
+		{
+			"lang": "fr",
+			"name": "Français",
+			"path": "lang/fr.json",
+			"flags": {}
+		  }
 	],
 
 	"initiative": "1d6",
 	"gridDistance": 1.5,
 	"gridUnits": "m",
+	"url": "https://github.com/riddyck/parallea",
 	
 	"primaryTokenAttribute": "physical",
 	"secondaryTokenAttribute": "stun"

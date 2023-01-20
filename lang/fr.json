@@ -1,0 +1,28 @@
+{
+    "parallea": {
+        "runeType":{
+            "none": "",
+            "fire": "Feu",
+            "light": "Lumière",
+            "magic": "Magie",
+            "edge": "Tranchant"
+        },
+        "runeLevel":{
+            "none": "",
+            "minor": "Mineur",
+            "intermediary": "Intermédiaire",
+            "major": "Majeure"
+        },
+        "table":{
+            "character": "Personnage",
+            "inventory": "Inventaire",
+            "lore": "Histoire"
+        },
+        "ACTOR": {
+            "TypeCritter": "Créature",
+            "TypeNpc": "PNJ",
+            "TypePlayer": "Personnage Joueur"
+          },
+        "test": "Ceci est un test"
+    }
+}

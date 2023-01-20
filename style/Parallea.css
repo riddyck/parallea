@@ -1,0 +1,69 @@
+#tab ul
+{
+    float : left;
+    height : 21px; /* à modifier suivant la taille de la police pour centrer le texte dans l'onglet */
+    background-color: #F4F9FD;
+    margin : 2px 2px 0 2px !important;  /* Pour les navigateurs autre que IE */
+    margin : 1px 2px 0 2px;  /* Pour IE  */
+    border : 1px solid #9EA0A1;
+}
+#tab li.active
+{
+    border-bottom: 1px solid #fff;
+    background-color: #fff;
+}
+#tab a
+{
+    display : block;
+    color : #666;
+    text-decoration : none;
+    padding : 4px;
+}
+#tab a:hover
+{
+    background : #fff;
+}
+
+
+<style>#truc nav
+{
+    float : left;
+    height : 21px; /* à modifier suivant la taille de la police pour centrer le texte dans l'onglet */
+    background-color: #008cff;
+    margin : 2px 2px 0 2px !important;  /* Pour les navigateurs autre que IE */
+    margin : 1px 2px 0 2px;  /* Pour IE  */
+    border : 1px solid #321581;
+    display: flex;
+    align-items: center;
+}
+#tab a
+{
+    display : block;
+    color : rgb(202, 0, 0);
+    text-decoration : none;
+    padding : 4px;
+}
+#tab a.active
+{
+    border-bottom: 1px solid #fff;
+    background-color: #00f;
+}
+#tab a:hover
+{
+    background : rgb(25, 189, 61);
+}
+</style>
+
+
+
+<nav id="tab">
+<a href="Accueil.html"> Accueil </a>
+<a href="./test.html"> Forums </a>
+<a href="Livre_or.html"> Livre d'or </a>
+<a href="Equipe.html"> L'équipe </a>
+<a href="Inscription.html"> S'inscrire </a>
+<a href="Connexion.html"> Se connecter </a>
+</nav>
+<section class = "sheet-body">
+  Truc truc
+</section>
