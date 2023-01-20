@@ -7,15 +7,29 @@
     <div>
         <table>
             <tr>
-                <th>{{localize 'parallea.runeType.fire'}}</th>
-                <th>{{localize 'parallea.runeLevel.major'}}</th>
-                <th>{{localize 'parallea.test'}}</th>
+                <th>{{localize 'parallea.sheet_display.weapon.rune'}}</th>
+                <th>{{localize 'parallea.sheet_display.weapon.dice_damage'}}</th>
+                <th>{{localize 'parallea.sheet_display.weapon.runable'}}</th>
                 <th>{{localize 'parallea.table.lore'}}</th>
                 <th>{{localize 'parallea.ACTOR.TypeCritter'}}</th>
             </tr>
             
             <tr>
-                
+                <td>
+                    <select name="data.rune_type" >
+                        {{#select data.rune_type}}
+                        {{#each config.rune_type as |name type|}}
+                        <option value="{{type}}">{{localize name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </td>
+                <td>
+                    <input name="data.dice_damage" type="text" value="{{data.dice_damage}}" data-dtype="Number" />
+                </td>
+                <td>
+                    <input name="data.runable" type="checkbox" {{checked data.runable}} />
+                </td>
             </tr>
             
         </table>

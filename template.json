@@ -9,7 +9,9 @@
             "dice_damage":0,
             "atk":0,
             "def":0,
-            "runes_number":0
+            "runable": false,
+            "runes_number":0,
+            "rune_type":""
         },
         "armor":{
             "dice_damage":0,

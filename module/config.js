@@ -1,19 +1,19 @@
 export const PARALLEA = {};
 
 console.log("\n\nON REMPLIT CONFIG\n\n");
-PARALLEA.runeType={
+PARALLEA.rune_type={
     none: "",
-    fire: "parallea.runeType.fire",
-    light: "parallea.runeType.light",
-    magic: "parallea.runeType.magic",
-    edge: "parallea.runeType.edge"
+    fire: "parallea.rune_type.fire",
+    light: "parallea.rune_type.light",
+    magic: "parallea.rune_type.magic",
+    edge: "parallea.rune_type.edge"
 }
 
-PARALLEA.runeLevel={
+PARALLEA.rune_level={
     none: "",
-    minor: "parallea.runeLevel.minor",
-    intermediary: "parallea.runeLevel.intermediary",
-    major: "parallea.runeLevel.major"
+    minor: "parallea.rune_level.minor",
+    intermediary: "parallea.rune_level.intermediary",
+    major: "parallea.rune_level.major"
 }
 PARALLEA.table={
     character: "parallea.table.character",

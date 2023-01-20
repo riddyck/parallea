@@ -1,13 +1,22 @@
 {
     "parallea": {
-        "runeType":{
+        "sheet_display":{
+            "weapon":{
+                "rune":"Rune",
+                "dice_damage": "Dé de l'arme",
+                "runable":"Runable"
+            }
+            
+        },
+        "rune_type":{
+            "name": "Rune:",
             "none": "",
             "fire": "Feu",
             "light": "Lumière",
             "magic": "Magie",
             "edge": "Tranchant"
         },
-        "runeLevel":{
+        "rune_level":{
             "none": "",
             "minor": "Mineur",
             "intermediary": "Intermédiaire",
