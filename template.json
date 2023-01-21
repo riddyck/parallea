@@ -1,5 +1,46 @@
 {
-    "Actor": {},
+    "Actor": {
+        "types":[
+            "npc",
+            "player",
+            "monster"
+        ],
+        "player":{
+            "identity":{
+                "name":"",
+                "age":20,
+                "race":"Humain",
+                "occupation":""
+            },
+            "attributs":{
+                "str":45,
+                "dex":45,
+                "int":45,
+                "wis":45,
+                "stl":45,
+                "cha":45
+            },
+            "mechanics":{
+                "specialisation":"",
+                "level":1,
+                
+                "hp":10,
+                "mana":10,
+
+                "hp_up":0,
+                "mana_up":0,
+
+                "def":10,
+                "arm":2,
+                "mr":2,
+
+                "physic_investment":0,
+                "range_investment":0,
+                "magic_investment":0,
+            }
+        }
+    },
+    
     "Item": {
         "types":[
             "weapon",
@@ -14,10 +55,12 @@
             "rune_type":""
         },
         "armor":{
-            "dice_damage":0,
             "atk":0,
             "def":0,
-            "runes_number":0
-        }
+            "runable": false,
+            "runes_number":0,
+            "rune_type":""
+        },
+        "description":""
     }
 }
