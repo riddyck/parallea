@@ -1,6 +1,8 @@
 export default class ParalleaActorSheet extends ActorSheet{
-    getTemplate(){
-        return `systems/module/sheets/${this.item.type}-sheet.html`
+
+    get template(){
+        //console.log(`${this.actor.type}`);
+        return `systems/parallea/templates/sheets/${this.actor.type}-sheet.html`
     }
 
     getData(){

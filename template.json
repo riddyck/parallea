@@ -36,9 +36,11 @@
 
                 "physic_investment":0,
                 "range_investment":0,
-                "magic_investment":0,
+                "magic_investment":0
             }
-        }
+        },
+        "npc": "",
+        "monster":""
     },
     
     "Item": {

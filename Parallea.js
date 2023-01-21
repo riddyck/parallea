@@ -1,6 +1,6 @@
 import { PARALLEA } from "./module/config.js";
 import ParalleaItemSheet from "./module/sheets/ParalleaItemSheet.js";
-import ParalleaActorSheet from "./module/sheets/ParalleaItemSheet.js";
+import ParalleaActorSheet from "./module/sheets/ParalleaActorSheet.js";
 import { preloadHandlebarsTemplates } from "./hadlebarTemplates.js";
 
 Hooks.once("init", function (){
