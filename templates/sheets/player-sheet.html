@@ -1,13 +1,16 @@
-<form class="actor-sheet {{cssClass}}" autocomplete="off">
+<form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
     <header class="sheet-header">
         <img src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="64" width="64"/>
         <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'Name' }}"/></h1>
     </header>
-
-    <nav>
-        <a class="actor_tab" data-tab="resume">Résumé</a>
+    <nav class="sheet-tabs tabs">
+        <a class="actor_tab" data-tab="features">Résumé</a>
         <a class="actor_tab" data-tab="inventory">Inventaire</a>
         <a class="actor_tab" data-tab="lore">Histoire</a>
     </nav>
+    <section class="sheet-body">
+        <div id ="featuresTab" class="tab features" data-group="primary" >{{>"systems/parallea/templates/navTabs/featuresTab.html"}}</div>
+        <div id ="inventoryTab" class="tab inventory" data-group="primary" data-tab="inventory"></div>{{>"systems/parallea/templates/navTabs/inventoryTab.html"}}</div>
+        <div id ="loreTab" class="tab lore" data-group="primary" data-tab="lore"></div>{{>"systems/parallea/templates/navTabs/loreTab.html"}}</div>
+    </section>
 </form>
-

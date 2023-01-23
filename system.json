@@ -5,8 +5,9 @@
 	"version": "1.0.0",
     "templateVersion": 1,
 	"compatibility": {
-		"minimum": "10.291",
-		"verified": "10.291"
+		"minimum": 10,
+		"verified": "10.287",
+		"maximum": 10
 	},
     "authors": [
 		{
