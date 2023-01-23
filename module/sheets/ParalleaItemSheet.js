@@ -6,8 +6,13 @@ export default class ParalleaItemSheet extends ItemSheet{
     }
 
     getData(){
-        const data = super.getData();
-        data.config= CONFIG.PARALLEA;
+        const context = super.getData();
+        const itemData = this.item.toObject(false);
+        context.system = itemData.system;
+        context.flags = itemData.flags;
+
+        //Mettre config sert dans le cas de menus déroulant par exemple
+        context.config= CONFIG.PARALLEA;
         return data;
     }
 }

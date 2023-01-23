@@ -17,9 +17,7 @@ export default class ParalleaActorSheet extends ActorSheet{
     getData(){
         
         const context = super.getData();
-        console.log(context.actor);
         const actorData = this.actor.toObject(false);
-        console.log(actorData);
         
         context.system = actorData.system;
         context.flags = actorData.flags;
@@ -28,7 +26,9 @@ export default class ParalleaActorSheet extends ActorSheet{
         // Prepare character data and items.
         if (actorData.type == 'character') {
             //this._prepareItems(context);
+            //REVOIR CA QUAND J'AURAI DES ITEMS A AJOUTER
             //this._prepareCharacterData(context);
+            //Derniè-re ligne sert surtout à la traduciton, pas mon problème du coup
         }
         
         // Prepare NPC data and items.
