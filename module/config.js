@@ -20,3 +20,12 @@ PARALLEA.table={
     lore: "Histoire"
 }
 PARALLEA.test="test";
+
+PARALLEA.attributs={
+    str: "Force",
+    dex: "Dextérité",
+    int: "Intelligence",
+    wis: "Sagesse",
+    stl: "Discrétion",
+    cha: "Charisme"
+}

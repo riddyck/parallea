@@ -1,20 +1,22 @@
-<p>Résumé</p>
 <table>
     <tr>
-        <th>Force</th>
-        <th>Dextérité</th>
-        <th>Intelligence</th>
-        <th>Sagesse</th>
-        <th>Discrétion</th>
-        <th>Charisme</th>
+        <th><span class="ability-mod rollable" data-roll="d20+@abilities.str.mod" data-label="{{mechanics.level}}">Force</span></th>
+        <th><span class="ability-mod rollable" data-roll="d20+@abilities.dex.mod" data-label="{{mechanics.level}}">Dextérité</span></th>
+        <th><span class="ability-mod rollable" data-roll="d20+@abilities.int.mod" data-label="{{mechanics.level}}">Intelligence</span></th>
+        <th><span class="ability-mod rollable" data-roll="d20+@abilities.wis.mod" data-label="{{mechanics.level}}">Sagesse</span></th>
+        <th><span class="ability-mod rollable" data-roll="d20+@abilities.stl.mod" data-label="{{mechanics.level}}">Discrétion</span></th>
+        <th><span class="ability-mod rollable" data-roll="d20+@abilities.cha.mod" data-label="{{mechanics.level}}">Charisme</span></th>
     </tr>
 
     <tr>
-        <th><input name="system.attributs.str" type="text" value="{{system.attributs.str}}" data-dtype="Number" min="10" max="90"/></th>
-        <th><input name="system.attributs.dex" type="text" value="{{system.attributs.dex}}" data-dtype="Number" min="10" max="90"/></th>
-        <th><input name="system.attributs.int" type="text" value="{{system.attributs.int}}" data-dtype="Number" min="10" max="90"/></th>
-        <th><input name="system.attributs.wis" type="text" value="{{system.attributs.wis}}" data-dtype="Number" min="10" max="90"/></th>
-        <th><input name="system.attributs.stl" type="text" value="{{system.attributs.stl}}" data-dtype="Number" min="10" max="90"/></th>
-        <th><input name="system.attributs.cha" type="text" value="{{system.attributs.cha}}" data-dtype="Number" min="10" max="90"/></th>
+        {{#each system.attributs as |value key|}}
+        <th class="flex-group-center">
+            <input name="system.attributs.{{key}}" type="text" value="{{value}}" data-dtype="Number" min="10" max="90"/>
+        </th>
+        {{/each}}
+        
     </tr>
 </table>    
+
+
+<span class="ability-mod rollable" data-roll="d20+@abilities.{{key}}.mod" data-label="{{mechanics.level}}">{{numberFormat system.mechanics.level decimals=0 sign=true}}</span>

@@ -22,9 +22,13 @@ export default class ParalleaActorSheet extends ActorSheet{
         context.system = actorData.system;
         context.flags = actorData.flags;
         
+        context.config= CONFIG.PARALLEA;
+        
+        console.log(this);
+        console.log(context);
         
         // Prepare character data and items.
-        if (actorData.type == 'character') {
+        if (actorData.type == 'player') {
             //this._prepareItems(context);
             //REVOIR CA QUAND J'AURAI DES ITEMS A AJOUTER
             //this._prepareCharacterData(context);
@@ -50,7 +54,7 @@ export default class ParalleaActorSheet extends ActorSheet{
     _prepareItems(context) {
         // Initialize containers.
         const gear = [];
-        const features = [];
+        const skills = [];
         const spells = [];
         /*
         // Iterate through items, allocating to containers
@@ -60,9 +64,9 @@ export default class ParalleaActorSheet extends ActorSheet{
             if (i.type === 'item') {
                 gear.push(i);
             }
-            // Append to features.
+            // Append to skills.
             else if (i.type === 'feature') {
-                features.push(i);
+                skills.push(i);
             }
             // Append to spells.
             else if (i.type === 'spell') {
@@ -75,7 +79,66 @@ export default class ParalleaActorSheet extends ActorSheet{
     
     // Assign and return
     //context.gear = gear;
-    //context.features = features;
+    //context.skills = skills;
     //context.spells = spells;
     
+        
+    
+    
+    /* -------------------------------------------- */
+    
+    /** @override */
+    activateListeners(html) {
+        super.activateListeners(html);
+        
+        // Render the item sheet for viewing/editing prior to the editable check.
+        html.find('.item-edit').click(ev => {
+            const li = $(ev.currentTarget).parents(".item");
+            const item = this.actor.items.get(li.data("itemId"));
+            item.sheet.render(true);
+        });
+        
+        // -------------------------------------------------------------
+        // Everything below here is only needed if the sheet is editable
+        if (!this.isEditable) return;
+        
+        // Add Inventory Item
+        html.find('.item-create').click(this._onItemCreate.bind(this));
+        
+        // Delete Inventory Item
+        html.find('.item-delete').click(ev => {
+            const li = $(ev.currentTarget).parents(".item");
+            const item = this.actor.items.get(li.data("itemId"));
+            item.delete();
+            li.slideUp(200, () => this.render(false));
+        });
+
+        //Listen Rollable Items
+        html.find('.rollable').click(this.onRoll);
+        
+    }
+
+
+    async _onItemCreate(event) {
+        event.preventDefault();
+        const header = event.currentTarget;
+        // Get the type of item to create.
+        const type = header.dataset.type;
+        // Grab any data associated with this control.
+        const data = duplicate(header.dataset);
+        // Initialize a default name.
+        const name = `New ${type.capitalize()}`;
+        // Prepare the item object.
+        const itemData = {
+          name: name,
+          type: type,
+          system: data
+        };
+        // Remove the type from the dataset since it's in the itemData.type prop.
+        delete itemData.system["type"];
+    
+        // Finally, create the item!
+        return await Item.create(itemData, {parent: this.actor});
+      }
+
 }

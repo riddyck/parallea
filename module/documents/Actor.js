@@ -25,8 +25,8 @@ export default class ParalleaActor extends Actor {
   * is queried and has a roll executed directly from it).
   */
   prepareDeriveData(){
-    const actorData = this.data;
-    const data = actorData.data;
+    const actorData = this;
+    const systemData = actorData.system;
     const flags = actorData.flags.parallea || {};
     
     // Make separate methods for each Actor type (character, npc, etc.) to keep
@@ -38,9 +38,9 @@ export default class ParalleaActor extends Actor {
   _preparePlayerData(actorData) {
     if (actorData.type != 'player') return;
     
-    const data = actorData.data;
+    const systemData = actorData.system;
     
-    for(let [key, attribut] of Object.entries(data.attributs)){
+    for(let [key, attribut] of Object.entries(systemData.attributs)){
       attribut.mod = Math.floor(attribut.value/10-5);
     }
   }

@@ -3,37 +3,37 @@
         <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
         <h1><input name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'Name' }}"/></h1>
     </header>
+    <div>
+        <table>
+            <tr>
+                <th>Rune</th>
+                <th>Dé de l'arme</th>
+                <th>Enchantable</th>
+            </tr>
+            
+            <tr>
+                <td>
+                    <select name="system.rune_type" >
+                        {{#select system.rune_type}}
+                        {{#each config.rune_type as |name type|}}
+                        <option value="{{type}}">{{name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </td>
+                <td>
+                    <input name="system.dice_damage" type="text" value="{{system.dice_damage}}" data-dtype="Number" />
+                </td>
+                <td>
+                    <input name="system.runable" type="checkbox" {{checked system.runable}} />
+                </td>
+            </tr>
+            
+        </table>
+    
+        <textarea name = "system.description">{{system.description}}</textarea>
+    </div>
     
 </form>
-<div>
-    <table>
-        <tr>
-            <th>Rune</th>
-            <th>Dé de l'arme</th>
-            <th>Enchantable</th>
-        </tr>
-        
-        <tr>
-            <td>
-                <select name="data.rune_type" >
-                    {{#select data.rune_type}}
-                    {{#each config.rune_type as |name type|}}
-                    <option value="{{type}}">{{name}}</option>
-                    {{/each}}
-                    {{/select}}
-                </select>
-            </td>
-            <td>
-                <input name="data.dice_damage" type="text" value="{{data.dice_damage}}" data-dtype="Number" />
-            </td>
-            <td>
-                <input name="data.runable" type="checkbox" {{checked data.runable}} />
-            </td>
-        </tr>
-        
-    </table>
-
-    <textarea name = "data.description">{{data.description}}</textarea>
-</div>
 
 
