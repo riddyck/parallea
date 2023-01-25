@@ -1,4 +1,4 @@
-export default class ParalleaActorSheet extends ActorSheet{
+export class ParalleaActorSheet extends ActorSheet{
     
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
@@ -24,9 +24,6 @@ export default class ParalleaActorSheet extends ActorSheet{
         
         context.config= CONFIG.PARALLEA;
         
-        console.log(this);
-        console.log(context);
-        
         // Prepare character data and items.
         if (actorData.type == 'player') {
             //this._prepareItems(context);
@@ -45,7 +42,6 @@ export default class ParalleaActorSheet extends ActorSheet{
         
         // Prepare active effects
         //context.effects = prepareActiveEffectCategories(this.actor.effects);
-        
         return context;
     }
     
@@ -114,7 +110,7 @@ export default class ParalleaActorSheet extends ActorSheet{
         });
 
         //Listen Rollable Items
-        html.find('.rollable').click(this.onRoll);
+        html.find('.rollable').click(this._onRoll.bind(this));
         
     }
 
@@ -139,6 +135,37 @@ export default class ParalleaActorSheet extends ActorSheet{
     
         // Finally, create the item!
         return await Item.create(itemData, {parent: this.actor});
+      }
+
+      _onRoll(event) {
+        event.preventDefault();
+        const element = event.currentTarget;
+        const dataset = element.dataset;
+
+        console.log(element);
+        console.log(dataset);
+    
+        // Handle item rolls.
+        if (dataset.rollType) {
+            console.log(dataset.rollType);
+          if (dataset.rollType == 'item') {
+            const itemId = element.closest('.item').dataset.itemId;
+            const item = this.actor.items.get(itemId);
+            if (item) return item.roll();
+          }
+        }
+    
+        // Handle rolls that supply the formula directly.
+        if (dataset.roll) {
+          let label = dataset.label ? `[ability] ${dataset.label}` : '';
+          let roll = new Roll(dataset.roll, this.actor.getRollData());
+          roll.toMessage({
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            flavor: label,
+            rollMode: game.settings.get('core', 'rollMode'),
+          });
+          return roll;
+        }
       }
 
 }

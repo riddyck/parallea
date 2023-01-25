@@ -1,4 +1,4 @@
-export default class ParalleaActor extends Actor {
+export class ParalleaActor extends Actor {
   
   // Prepare data for the actor. Calling the super version of this executes
   // the following, in order: data reset (to clear active effects),
@@ -24,7 +24,7 @@ export default class ParalleaActor extends Actor {
   * available both inside and outside of character sheets (such as if an actor
   * is queried and has a roll executed directly from it).
   */
-  prepareDeriveData(){
+  prepareDerivedData(){
     const actorData = this;
     const systemData = actorData.system;
     const flags = actorData.flags.parallea || {};
@@ -36,10 +36,11 @@ export default class ParalleaActor extends Actor {
   
   
   _preparePlayerData(actorData) {
-    if (actorData.type != 'player') return;
-    
+    if (actorData.type != 'player') {
+      return;
+    }
     const systemData = actorData.system;
-    
+  
     for(let [key, attribut] of Object.entries(systemData.attributs)){
       attribut.mod = Math.floor(attribut.value/10-5);
     }
@@ -62,7 +63,7 @@ export default class ParalleaActor extends Actor {
   * Prepare character roll data.
   */
   _getCharacterRollData(data) {
-    if (this.data.type !== 'character') return;
+    if (this.type !== 'character') return;
     
     // Copy the ability scores to the top level, so that rolls can use
     // formulas like `@str.mod + 4`.
@@ -77,7 +78,7 @@ export default class ParalleaActor extends Actor {
   * Prepare NPC roll data.
   */
   _getNpcRollData(data) {
-    if (this.data.type !== 'npc') return;
+    if (this.type !== 'npc') return;
     
     // Process additional NPC data here.
   }
