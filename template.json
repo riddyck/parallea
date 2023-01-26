@@ -43,21 +43,18 @@
         "ressources":{
           "hp": {
             "base":0,
-            "value":25,
-            "current":10,
+            "current":0,
             "label": "PV",
             "display": true
           },
           "mana": {
             "base":0,
-            "value":0,
             "current":0,
             "label": "Mana",
             "display": true
           },
           "ressource": {
             "base":0,
-            "value":0,
             "current":0,
             "label": "Ressource secondaire",
             "display": false
@@ -66,45 +63,51 @@
         
         "defense":{
           "def":{
-            "value":10,
+            "armor":0,
+            "bonus":0,
             "label": "Défense"
           },
           "arm":{
-            "value":0,
+            "armor":0,
+            "bonus":0,
             "label": "Armure"
           },
           "mr":{
-            "value":0,
+            "armor":0,
+            "bonus":0,
             "label": "RM"
           }
         },
         
         "attack":{
           "phy":{
-            "value":0,
+            "bonus":0,
+            "armor":0,
             "label": "Attaque physique"
           },
           "ran":{
-            "value":0,
+            "bonus":0,
+            "armor":0,
             "label": "Attaque à distance"
           },
           "mag":{
-            "value":0,
+            "bonus":0,
+            "armor":0,
             "label": "Attaque magique"
           }
         },
         
         "damage":{
           "phy":{
-            "value":0,
+            "bonus":0,
             "label": "Dommages physiques"
           },
           "ran":{
-            "value":0,
+            "bonus":0,
             "label": "Dommages à distance"
           },
           "mag":{
-            "value":0,
+            "bonus":0,
             "label": "Dommages magiques"
           }
         }
@@ -124,7 +127,7 @@
             "value":0,
             "label": "Investissement en distance"
           },
-          "rm_investment":{
+          "mr_investment":{
             "value":0,
             "label": "Investissement en magie"
           }
@@ -174,7 +177,9 @@
 "Item": {
   "types":[
     "weapon",
-    "armor"
+    "armor",
+    "spell",
+    "skill"
   ],
   "weapon":{
     "attack":{

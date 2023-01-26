@@ -40,26 +40,15 @@ export class ParalleaActor extends Actor {
       return;
     }
     const systemData = actorData.system;
-  
+    
     for(let [key, attribut] of Object.entries(systemData.attributs)){
       attribut.mod = Math.floor(attribut.value/10-5);
     }
 
-    const attributs = systemData.attributs;
-    const mechanics = systemData.mechanics;
-    const progression = systemData.progression;
-
-    //---Calculating mechanics.defense----
-
-    mechanics.defense.def.value = Math.floor(attributs.dex.value/5) + progression.defense.def_investment.value ; 
-    mechanics.defense.arm.value = Math.floor(attributs.str.value/5)-10; 
-    mechanics.defense.mr.value = Math.floor(attributs.int.value/5)-10; 
-
-    //---Calculating mechanics.ressources----
-
-    mechanics.ressources.hp.value = mechanics.ressources.hp.base + progression.ressources.hp_up.value + progression.ressources.hp_up.special; 
-    mechanics.ressources.mana.value = mechanics.ressources.mana.base + progression.ressources.mana_up.value + progression.ressources.mana_up.special;
-    mechanics.ressources.ressource.value = mechanics.ressources.ressource.base + progression.ressources.ressource_up.value + progression.ressources.ressource_up.special;
+    this._computeMechanicsDefense(systemData);
+    this._computeMechanicsRessources(systemData);
+    this._computeMechanicsAttack(systemData);
+    
     
   }
   
@@ -68,7 +57,7 @@ export class ParalleaActor extends Actor {
   */
   getRollData() {
     const data = super.getRollData();
-
+    
     //console.log("Data actor ", data);
     
     // Prepare character roll data.
@@ -105,4 +94,60 @@ export class ParalleaActor extends Actor {
     
     // Process additional NPC data here.
   }
+  
+  _computeMechanicsDefense(systemData){
+    const attributs = systemData.attributs;
+    const mechanics = systemData.mechanics;
+    const progression = systemData.progression;
+    
+    //---Calculating mechanics.defense----
+    
+    const defense = mechanics.defense;
+    
+    defense.def.value = Math.floor(attributs.dex.value/5) + progression.defense.def_investment.value + defense.def.armor + defense.def.bonus; 
+    defense.arm.value = Math.floor(attributs.str.value-50)/5 + 2*progression.defense.arm_investment.value + defense.arm.armor + defense.arm.armor
+    defense.mr.value = Math.floor(attributs.int.value-50)/5 + 2*progression.defense.mr_investment.value + defense.mr.armor + defense.mr.armor
+  }
+  _computeMechanicsRessources(systemData){
+    const mechanics = systemData.mechanics;
+    const progression = systemData.progression;
+    
+    //---Calculating mechanics.ressources----
+    
+    const ress = mechanics.ressources;
+    
+    ress.hp.value = ress.hp.base + progression.ressources.hp_up.value + progression.ressources.hp_up.special; 
+    ress.mana.value = ress.mana.base + progression.ressources.mana_up.value + progression.ressources.mana_up.special;
+    ress.ressource.value = ress.ressource.base + progression.ressources.ressource_up.value + progression.ressources.ressource_up.special;
+    
+  }
+  _computeMechanicsAttack(systemData){
+    const attributs = systemData.attributs;
+    const mechanics = systemData.mechanics;
+    const progression = systemData.progression;
+    
+    //---Calculating mechanics.attack----
+    
+    const atk = mechanics.attack;
+    
+    atk.phy.base =  Math.max(Math.floor(attributs.str.value-50)/10,Math.floor(attributs.dex.value-50)/10);
+    atk.ran.base =  Math.floor(attributs.dex.value-50)/10;
+    atk.mag.base =  Math.floor(attributs.int.value-50)/10;
+    
+    mechanics.damage.phy.base =  Math.max(Math.floor(attributs.str.value-50)/10,0);
+    mechanics.damage.ran.base =  Math.max(Math.floor(attributs.dex.value-50)/10,0);
+    mechanics.damage.mag.base =  Math.max(Math.floor(attributs.int.value-50)/10,0);
+    
+    atk.phy.value = atk.phy.base + atk.phy.bonus + atk.phy.armor + progression.attack.physic_investment.value;
+    atk.ran.value = atk.ran.base + atk.ran.bonus + atk.ran.armor + progression.attack.range_investment.value;
+    atk.mag.value = atk.mag.base + atk.mag.bonus + atk.mag.armor + progression.attack.magic_investment.value;
+  }
+  
+  
+  
+  
+  
+  
+  
+  
 }

@@ -14,20 +14,21 @@ Hooks.once("init", function (){
     
     
     game.parallea = {
-        ParalleaActor
+        ParalleaActor,
+        ParalleaItem
     };
     
     
     CONFIG.PARALLEA = PARALLEA;
     
     CONFIG.Actor.documentClass = ParalleaActor;
-    CONFIG.Item.documetClass = ParalleaItem;
+    CONFIG.Item.documentClass = ParalleaItem;
     
-    Items.unregisterSheet("core", ItemSheet);
-    Items.registerSheet("parallea", ParalleaItemSheet, {makeDefault:true});
     
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("parallea", ParalleaActorSheet, {makeDefault:true});
+    Items.unregisterSheet("core", ItemSheet);
+    Items.registerSheet("parallea", ParalleaItemSheet, {makeDefault:true});
 
     return preloadHandlebarsTemplates();
 });

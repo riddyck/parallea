@@ -1,17 +1,49 @@
 <table>
     <tr>
         {{#each system.attributs as |attribut key|}}
-        <th><span class="ability-mod rollable" data-roll="d100+@attributs.{{key}}.value" data-label="{{attribut.label}}">{{attribut.label}}</span></th>
+        <th><span class="ability-mod rollable" data-roll="d100+@attributs.{{key}}.value" data-label="{{attribut.label}}" data-truc="Je teste">{{attribut.label}}</span></th>
         {{/each}}
     </tr>
-
+    
     <tr>
         {{#each system.attributs as |attribut key|}}
         <th class="flex-group-center">
             <input name="system.attributs.{{key}}.value" type="text" value="{{attribut.value}}" data-dtype="Number" min="10" max="90"/>
             
-            </th>
+        </th>
         {{/each}}
         
     </tr>
 </table>    
+<div class="flexcol">
+    <div class="flexrow flex-group-center">
+        <div id="mechanics.defense" class="flexcol">
+            {{#each system.mechanics.defense as |attribut key|}}
+            <div class="flexrow flex-group-center">
+                <label for="system.mechanics.defense.{{key}}.value" class="resource-label" >{{attribut.label}} : {{attribut.value}}</label>
+                <div class="flexcol">
+                    <div class="flexrow flex-group-center">
+                        <label for="system.mechanics.defense.{{key}}.bonus" class="flexrow">Bonus/malus de {{attribut.label}}: </label>
+                        <input name="system.mechanics.defense.{{key}}.bonus" value="{{attribut.bonus}}" type="text" data-dtype="Number"/>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+    <div class="flexrow flex-group-center">
+        <div id="mechanics.attack" class="flexcol">
+            {{#each system.mechanics.attack as |attribut key|}}
+            <div class="flexrow flex-group-center">
+                <label for="system.mechanics.attack.{{key}}.value" class="resource-label" >{{attribut.label}} : {{attribut.value}}</label>
+                <div class="flexcol">
+                    <div class="flexrow flex-group-center">
+                        <label for="system.mechanics.attack.{{key}}.bonus" class="flexrow">Bonus/malus de {{attribut.label}}: </label>
+                        <input name="system.mechanics.attack.{{key}}.bonus" value="{{attribut.bonus}}" type="text" data-dtype="Number"/>
+                    </div>
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>

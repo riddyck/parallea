@@ -3,7 +3,7 @@ export class ParalleaItemSheet extends ItemSheet{
     /** @override */
     static get defaultOptions() {
         return mergeObject(super.defaultOptions, {
-            classes: ["boilerplate", "sheet", "item"],
+            classes: ["parallea", "sheet", "item"],
             width: 520,
             height: 480,
             tabs: [{ navSelector: ".sheet-tabs", contentSelector: ".sheet-body", initial: "description" }]
@@ -63,7 +63,7 @@ export class ParalleaItemSheet extends ItemSheet{
         const element = event.currentTarget;
         const dataset = element.dataset;
         
-        console.log(dataset);/*
+        console.log(dataset);
         // Handle item rolls.
         if (dataset.rollType) {
             console.log(dataset.rollType);
@@ -73,7 +73,7 @@ export class ParalleaItemSheet extends ItemSheet{
                 if (item) return item.roll();
             }
         }
-        */
+        
         // Handle rolls that supply the formula directly.
         if (dataset.roll) {
             let label = dataset.label ? `Jet de ${dataset.label}` : '';

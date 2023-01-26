@@ -24,11 +24,11 @@ export class ParalleaActorSheet extends ActorSheet{
         
         context.config= CONFIG.PARALLEA;
 
-        console.log(context);
+        console.log("Context début actor sheet",context);
         
         // Prepare character data and items.
         if (actorData.type == 'player') {
-            //this._prepareItems(context);
+            this._prepareItems(context);
             //REVOIR CA QUAND J'AURAI DES ITEMS A AJOUTER
             //this._prepareCharacterData(context);
             //Derniè-re ligne sert surtout à la traduciton, pas mon problème du coup
@@ -51,34 +51,40 @@ export class ParalleaActorSheet extends ActorSheet{
     
     _prepareItems(context) {
         // Initialize containers.
+        const arsenal = [];
         const gear = [];
         const skills = [];
         const spells = [];
-        /*
+        
         // Iterate through items, allocating to containers
         for (let i of context.items) {
             i.img = i.img || DEFAULT_TOKEN;
-            // Append to gear.
-            if (i.type === 'item') {
+            // Append weapons to arsenal.
+            if (i.type === 'weapon') {
+                arsenal.push(i);
+            }
+            // Append armors to gear.
+            else if (i.type === 'armor') {
                 gear.push(i);
             }
             // Append to skills.
-            else if (i.type === 'feature') {
+            else if (i.type === 'skill') {
                 skills.push(i);
             }
             // Append to spells.
             else if (i.type === 'spell') {
-                if (i.data.spellLevel != undefined) {
-                    spells[i.data.spellLevel].push(i);
-                }
+                spells.push(i);
             }
-        }*/
+        }
+        
+    // Assign and return
+    context.arsenal = arsenal;
+    context.gear = gear;
+    context.skills = skills;
+    context.spells = spells;
+
     }
     
-    // Assign and return
-    //context.gear = gear;
-    //context.skills = skills;
-    //context.spells = spells;
     
     
     
@@ -122,6 +128,8 @@ export class ParalleaActorSheet extends ActorSheet{
         const header = event.currentTarget;
         // Get the type of item to create.
         const type = header.dataset.type;
+        console.log("onItemCreat header",header);
+        console.log("onItemCreat header dataset",header.dataset);
         // Grab any data associated with this control.
         const data = duplicate(header.dataset);
         // Initialize a default name.
@@ -132,6 +140,7 @@ export class ParalleaActorSheet extends ActorSheet{
             type: type,
             system: data
         };
+        console.log("onItemCreat itemData",itemData);
         // Remove the type from the dataset since it's in the itemData.type prop.
         delete itemData.system["type"];
         
@@ -143,19 +152,23 @@ export class ParalleaActorSheet extends ActorSheet{
         event.preventDefault();
         const element = event.currentTarget;
         const dataset = element.dataset;
+
+        console.log("_onRoll Dataset",dataset);
         
         // Handle item rolls.
         if (dataset.rollType) {
-            //console.log("Roll type actor sheet", dataset.rollType);
+            console.log("Roll type actor sheet", dataset.rollType);
             if (dataset.rollType == 'item') {
                 const itemId = element.closest('.item').dataset.itemId;
                 const item = this.actor.items.get(itemId);
+                console.log("Roll type item",item);
                 if (item) return item.roll();
             }
         }
         
         // Handle rolls that supply the formula directly.
         if (dataset.roll) {
+            console.log("PAR ICI",dataset.truc);
             let label = dataset.label ? `Jet de ${dataset.label}` : '';
             let roll = new Roll(dataset.roll, this.actor.getRollData());
             roll.toMessage({

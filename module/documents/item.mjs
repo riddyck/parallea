@@ -27,6 +27,8 @@ export class ParalleaItem extends Item {
   async roll() {
     const item = this;
 
+    console.log("On est entré dans le roll depuis l'item !");
+
     // Initialize chat data.
     const speaker = ChatMessage.getSpeaker({ actor: this.actor });
     const rollMode = game.settings.get('core', 'rollMode');
