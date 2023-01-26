@@ -4,7 +4,8 @@ export const preloadHandlebarsTemplates = async function() {
         "systems/parallea/templates/sheets/test.html",
 		"systems/parallea/templates/navTabs/inventoryTab.html",
 		"systems/parallea/templates/navTabs/loreTab.html",
-		"systems/parallea/templates/navTabs/featuresTab.html"
+		"systems/parallea/templates/navTabs/featuresTab.html",
+		"systems/parallea/templates/navTabs/playerSettingsTab.html"
     ];
 
 	console.log(`Load templates`);

@@ -23,6 +23,8 @@ export class ParalleaActorSheet extends ActorSheet{
         context.flags = actorData.flags;
         
         context.config= CONFIG.PARALLEA;
+
+        console.log(context);
         
         // Prepare character data and items.
         if (actorData.type == 'player') {
@@ -78,7 +80,7 @@ export class ParalleaActorSheet extends ActorSheet{
     //context.skills = skills;
     //context.spells = spells;
     
-        
+    
     
     
     /* -------------------------------------------- */
@@ -108,13 +110,13 @@ export class ParalleaActorSheet extends ActorSheet{
             item.delete();
             li.slideUp(200, () => this.render(false));
         });
-
+        
         //Listen Rollable Items
         html.find('.rollable').click(this._onRoll.bind(this));
         
     }
-
-
+    
+    
     async _onItemCreate(event) {
         event.preventDefault();
         const header = event.currentTarget;
@@ -126,46 +128,43 @@ export class ParalleaActorSheet extends ActorSheet{
         const name = `New ${type.capitalize()}`;
         // Prepare the item object.
         const itemData = {
-          name: name,
-          type: type,
-          system: data
+            name: name,
+            type: type,
+            system: data
         };
         // Remove the type from the dataset since it's in the itemData.type prop.
         delete itemData.system["type"];
-    
+        
         // Finally, create the item!
         return await Item.create(itemData, {parent: this.actor});
-      }
-
-      _onRoll(event) {
+    }
+    
+    _onRoll(event) {
         event.preventDefault();
         const element = event.currentTarget;
         const dataset = element.dataset;
-
-        console.log(element);
-        console.log(dataset);
-    
+        
         // Handle item rolls.
         if (dataset.rollType) {
-            console.log(dataset.rollType);
-          if (dataset.rollType == 'item') {
-            const itemId = element.closest('.item').dataset.itemId;
-            const item = this.actor.items.get(itemId);
-            if (item) return item.roll();
-          }
+            //console.log("Roll type actor sheet", dataset.rollType);
+            if (dataset.rollType == 'item') {
+                const itemId = element.closest('.item').dataset.itemId;
+                const item = this.actor.items.get(itemId);
+                if (item) return item.roll();
+            }
         }
-    
+        
         // Handle rolls that supply the formula directly.
         if (dataset.roll) {
-          let label = dataset.label ? `[ability] ${dataset.label}` : '';
-          let roll = new Roll(dataset.roll, this.actor.getRollData());
-          roll.toMessage({
-            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
-            flavor: label,
-            rollMode: game.settings.get('core', 'rollMode'),
-          });
-          return roll;
+            let label = dataset.label ? `Jet de ${dataset.label}` : '';
+            let roll = new Roll(dataset.roll, this.actor.getRollData());
+            roll.toMessage({
+                speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+                flavor: label,
+                rollMode: game.settings.get('core', 'rollMode')
+            });
+            return roll;
         }
-      }
-
+    }
+    
 }

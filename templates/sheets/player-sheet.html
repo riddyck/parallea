@@ -1,28 +1,45 @@
 <form class="{{cssClass}} {{actor.type}} flexcol" autocomplete="off">
     <header class="sheet-header">
-      <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
-      <div class="header-fields">
+        <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}" height="100" width="100"/>
+        <div class="header-fields">
             <h1 class="charname"><input name="name" type="text" value="{{actor.name}}" placeholder="Nom"/></h1>
-            <div class="resources grid grid-2col">
-                <div class="resource flex-group-center">
-                    <p>Niveau : </p>
-                    <p>Spécialisation : </p>
-                    </div>
-                <div>
-                    <input name="system.mechanics.level" type="text" value="{{system.mechanics.level}}" data-dtype="Number"/>
-                    <input name="system.mechanics.specialisation" type="text" value="{{system.mechanics.specialisation}}"/>
+            <div class="abilities flexcol">
+                <div class="ability flexrow flex-group-center">
+                    <label for="system.progression.level" class="resource-label" >Niveau: </label>
+                    <input name="system.progression.level" type="text" value="{{system.progression.level}}" data-dtype="Number"/>
                 </div>
             </div>
+            <div class="abilities flexcol">
+                <div class="ability flexrow flex-group-center">
+                    <label for="system.progression.specialisation" class="resource-label">Spécialisation: </label>
+                    <input name="system.progression.specialisation" type="text" value="{{system.progression.specialisation}}" data-dtype="Number"/>
+                </div>
+            </div>
+            
+            {{#each system.mechanics.ressources as |ress key|}}
+            {{#if ress.display}}
+            <div class="abilities flexcol">
+                <div class="ability flexrow flex-group-center">
+                    <label for="system.mechanics.ressources.{{key}}" class="resource-label">{{ress.label}}: </label>
+                    <input type="text" name="system.mechanics.ressources.{{key}}.current" value="{{ress.current}}" data-dtype="Number"/>
+                    <span> / </span>
+                    <span>{{ress.value}}</span>
+                </div>
+            </div>
+            {{/if}}
+            {{/each}}
         </div>
     </header>
     <nav class="sheet-tabs tabs" data-group="primary">
         <a class="item" data-tab="features">Résumé</a>
         <a class="item" data-tab="inventory">Inventaire</a>
         <a class="item" data-tab="lore">Histoire</a>
+        <a class="item" data-tab="settings">Paramètres</a>
     </nav>
     <section class="sheet-body">
         <div class="tab features active" data-group="primary" data-tab="features">{{>"systems/parallea/templates/navTabs/featuresTab.html"}}</div>
         <div class="tab inventory" data-group="primary" data-tab="inventory">{{>"systems/parallea/templates/navTabs/inventoryTab.html"}}</div>
         <div class="tab lore" data-group="primary" data-tab="lore">{{>"systems/parallea/templates/navTabs/loreTab.html"}}</div>
+        <div class="tab settings" data-group="primary" data-tab="settings">{{>"systems/parallea/templates/navTabs/playerSettingsTab.html"}}</div>
     </section>
 </form>

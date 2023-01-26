@@ -1,7 +1,7 @@
 <table>
     <tr>
         {{#each system.attributs as |attribut key|}}
-        <th><span class="ability-mod rollable" data-roll="d100cs<=(@attributs.{{key}}.value)" data-label="Jet de {{attribut.label}}">{{attribut.label}}</span></th>
+        <th><span class="ability-mod rollable" data-roll="d100+@attributs.{{key}}.value" data-label="{{attribut.label}}">{{attribut.label}}</span></th>
         {{/each}}
     </tr>
 
