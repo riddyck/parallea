@@ -29,3 +29,9 @@ PARALLEA.attributs={
     stl: "Discrétion",
     cha: "Charisme"
 }
+
+PARALLEA.images={
+    sword : "icons/svg/sword.svg",
+    itemBag : "icons/svg/item-bag.svg",
+    angel : "icons/svg/angel.svg"
+}

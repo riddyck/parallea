@@ -183,7 +183,8 @@
   ],
   "weapon":{
     "attack":{
-      "atk":0
+      "base":0,
+      "label": "Attaque"
     },
     "damage":{
       "dice_damage":0,
@@ -200,7 +201,8 @@
       "rune_type":""
     },
     "attributs":{
-      "hands":1
+      "hands":1,
+      "type": "phy"
     },
     "special":{
       "precision":{
@@ -224,11 +226,6 @@
         "label": "Pas de malus au maniment de deux armes."
       }
     }
-    
-    
-    
-    
-    
   },
   "armor":{
     "atk":0,

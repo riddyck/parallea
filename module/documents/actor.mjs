@@ -7,6 +7,7 @@ export class ParalleaActor extends Actor {
   
   prepareData(){
     super.prepareData();
+    console.log("Actor Parallea",this);
   }
   
   /** @override */
@@ -105,8 +106,8 @@ export class ParalleaActor extends Actor {
     const defense = mechanics.defense;
     
     defense.def.value = Math.floor(attributs.dex.value/5) + progression.defense.def_investment.value + defense.def.armor + defense.def.bonus; 
-    defense.arm.value = Math.floor(attributs.str.value-50)/5 + 2*progression.defense.arm_investment.value + defense.arm.armor + defense.arm.armor
-    defense.mr.value = Math.floor(attributs.int.value-50)/5 + 2*progression.defense.mr_investment.value + defense.mr.armor + defense.mr.armor
+    defense.arm.value = Math.floor((attributs.str.value-50)/5) + 2*progression.defense.arm_investment.value + defense.arm.armor + defense.arm.armor
+    defense.mr.value = Math.floor((attributs.int.value-50)/5) + 2*progression.defense.mr_investment.value + defense.mr.armor + defense.mr.armor
   }
   _computeMechanicsRessources(systemData){
     const mechanics = systemData.mechanics;
@@ -130,13 +131,13 @@ export class ParalleaActor extends Actor {
     
     const atk = mechanics.attack;
     
-    atk.phy.base =  Math.max(Math.floor(attributs.str.value-50)/10,Math.floor(attributs.dex.value-50)/10);
-    atk.ran.base =  Math.floor(attributs.dex.value-50)/10;
-    atk.mag.base =  Math.floor(attributs.int.value-50)/10;
+    atk.phy.base =  Math.max(Math.floor((attributs.str.value-50)/10),Math.floor((attributs.dex.value-50)/10));
+    atk.ran.base =  Math.floor((attributs.dex.value-50)/10);
+    atk.mag.base =  Math.floor((attributs.int.value-50)/10);
     
-    mechanics.damage.phy.base =  Math.max(Math.floor(attributs.str.value-50)/10,0);
-    mechanics.damage.ran.base =  Math.max(Math.floor(attributs.dex.value-50)/10,0);
-    mechanics.damage.mag.base =  Math.max(Math.floor(attributs.int.value-50)/10,0);
+    mechanics.damage.phy.base =  Math.max(Math.floor((attributs.str.value-50)/10),0);
+    mechanics.damage.ran.base =  Math.max(Math.floor((attributs.dex.value-50)/10),0);
+    mechanics.damage.mag.base =  Math.max(Math.floor((attributs.int.value-50)/10),0);
     
     atk.phy.value = atk.phy.base + atk.phy.bonus + atk.phy.armor + progression.attack.physic_investment.value;
     atk.ran.value = atk.ran.base + atk.ran.bonus + atk.ran.armor + progression.attack.range_investment.value;

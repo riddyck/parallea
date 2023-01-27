@@ -24,7 +24,6 @@ export class ParalleaItemSheet extends ItemSheet{
         context.system = itemData.system;
         context.flags = itemData.flags;
         
-        console.log(this);
         // Retrieve the roll data for TinyMCE editors.
         context.rollData = {};
         

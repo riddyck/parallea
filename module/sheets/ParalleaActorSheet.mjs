@@ -23,8 +23,6 @@ export class ParalleaActorSheet extends ActorSheet{
         context.flags = actorData.flags;
         
         context.config= CONFIG.PARALLEA;
-
-        console.log("Context début actor sheet",context);
         
         // Prepare character data and items.
         if (actorData.type == 'player') {
@@ -61,6 +59,7 @@ export class ParalleaActorSheet extends ActorSheet{
             i.img = i.img || DEFAULT_TOKEN;
             // Append weapons to arsenal.
             if (i.type === 'weapon') {
+                console.log("Prepare weapon",i);
                 arsenal.push(i);
             }
             // Append armors to gear.
@@ -124,6 +123,8 @@ export class ParalleaActorSheet extends ActorSheet{
     
     
     async _onItemCreate(event) {
+console.log("\n\nCONFIG\n\n",CONFIG);
+
         event.preventDefault();
         const header = event.currentTarget;
         // Get the type of item to create.
@@ -138,7 +139,8 @@ export class ParalleaActorSheet extends ActorSheet{
         const itemData = {
             name: name,
             type: type,
-            system: data
+            system: data,
+            img: CONFIG.PARALLEA.images.angel
         };
         console.log("onItemCreat itemData",itemData);
         // Remove the type from the dataset since it's in the itemData.type prop.
@@ -181,3 +183,4 @@ export class ParalleaActorSheet extends ActorSheet{
     }
     
 }
+
