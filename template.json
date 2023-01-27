@@ -188,7 +188,8 @@
     },
     "damage":{
       "dice_damage":0,
-      "rune_damage":0
+      "rune_damage":0,
+      "base":0
     },
     "defense":{
       "def":0,
@@ -198,7 +199,7 @@
       "runable": true,
       "runes_number":0,
       "runes_spots_number":1,
-      "rune_type":""
+      "rune_type":{}
     },
     "attributs":{
       "hands":1,

@@ -7,7 +7,6 @@ export class ParalleaActor extends Actor {
   
   prepareData(){
     super.prepareData();
-    console.log("Actor Parallea",this);
   }
   
   /** @override */
@@ -49,6 +48,7 @@ export class ParalleaActor extends Actor {
     this._computeMechanicsDefense(systemData);
     this._computeMechanicsRessources(systemData);
     this._computeMechanicsAttack(systemData);
+    this._computeMechanicsDamage(systemData);
     
     
   }
@@ -135,17 +135,29 @@ export class ParalleaActor extends Actor {
     atk.ran.base =  Math.floor((attributs.dex.value-50)/10);
     atk.mag.base =  Math.floor((attributs.int.value-50)/10);
     
-    mechanics.damage.phy.base =  Math.max(Math.floor((attributs.str.value-50)/10),0);
-    mechanics.damage.ran.base =  Math.max(Math.floor((attributs.dex.value-50)/10),0);
-    mechanics.damage.mag.base =  Math.max(Math.floor((attributs.int.value-50)/10),0);
-    
     atk.phy.value = atk.phy.base + atk.phy.bonus + atk.phy.armor + progression.attack.physic_investment.value;
     atk.ran.value = atk.ran.base + atk.ran.bonus + atk.ran.armor + progression.attack.range_investment.value;
     atk.mag.value = atk.mag.base + atk.mag.bonus + atk.mag.armor + progression.attack.magic_investment.value;
   }
   
   
-  
+  _computeMechanicsDamage(systemData){
+    const attributs = systemData.attributs;
+    const mechanics = systemData.mechanics;
+    const progression = systemData.progression;
+    
+    //---Calculating mechanics.attack----
+    
+    const dmg = mechanics.damage;
+    
+    dmg.phy.base =  Math.max(Math.floor((attributs.str.value-50)/10),0);
+    dmg.ran.base =  Math.max(Math.floor((attributs.dex.value-50)/10),0);
+    dmg.mag.base =  Math.max(Math.floor((attributs.int.value-50)/10),0);
+    
+    dmg.phy.value = dmg.phy.base + dmg.phy.bonus + progression.attack.physic_investment.value;
+    dmg.ran.value = dmg.ran.base + dmg.ran.bonus + progression.attack.range_investment.value;
+    dmg.mag.value = dmg.mag.base + dmg.mag.bonus + progression.attack.magic_investment.value;
+  }
   
   
   

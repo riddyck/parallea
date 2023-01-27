@@ -33,5 +33,15 @@ PARALLEA.attributs={
 PARALLEA.images={
     sword : "icons/svg/sword.svg",
     itemBag : "icons/svg/item-bag.svg",
-    angel : "icons/svg/angel.svg"
+    angel : "icons/svg/angel.svg",
+    shield : "icons/svg/shield.svg",
+    lightning : "icons/svg/lightning.svg",
+    book : "icons/svg/book.svg"
+}
+
+
+PARALLEA.weapon_types={
+    phy : "Physique",
+    ran : "Distance",
+    mag : "Magique"
 }

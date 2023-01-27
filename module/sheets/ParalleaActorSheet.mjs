@@ -15,7 +15,6 @@ export class ParalleaActorSheet extends ActorSheet{
     }
     
     getData(){
-        
         const context = super.getData();
         const actorData = this.actor.toObject(false);
         
@@ -59,7 +58,6 @@ export class ParalleaActorSheet extends ActorSheet{
             i.img = i.img || DEFAULT_TOKEN;
             // Append weapons to arsenal.
             if (i.type === 'weapon') {
-                console.log("Prepare weapon",i);
                 arsenal.push(i);
             }
             // Append armors to gear.
@@ -78,6 +76,7 @@ export class ParalleaActorSheet extends ActorSheet{
         
     // Assign and return
     context.arsenal = arsenal;
+    console.log("Arsenal",arsenal);
     context.gear = gear;
     context.skills = skills;
     context.spells = spells;
@@ -123,14 +122,11 @@ export class ParalleaActorSheet extends ActorSheet{
     
     
     async _onItemCreate(event) {
-console.log("\n\nCONFIG\n\n",CONFIG);
 
         event.preventDefault();
         const header = event.currentTarget;
         // Get the type of item to create.
         const type = header.dataset.type;
-        console.log("onItemCreat header",header);
-        console.log("onItemCreat header dataset",header.dataset);
         // Grab any data associated with this control.
         const data = duplicate(header.dataset);
         // Initialize a default name.
@@ -140,9 +136,8 @@ console.log("\n\nCONFIG\n\n",CONFIG);
             name: name,
             type: type,
             system: data,
-            img: CONFIG.PARALLEA.images.angel
+            img: this._getItemIcon(type)
         };
-        console.log("onItemCreat itemData",itemData);
         // Remove the type from the dataset since it's in the itemData.type prop.
         delete itemData.system["type"];
         
@@ -154,23 +149,19 @@ console.log("\n\nCONFIG\n\n",CONFIG);
         event.preventDefault();
         const element = event.currentTarget;
         const dataset = element.dataset;
-
-        console.log("_onRoll Dataset",dataset);
+        console.log("Dataset",dataset);
         
         // Handle item rolls.
         if (dataset.rollType) {
-            console.log("Roll type actor sheet", dataset.rollType);
             if (dataset.rollType == 'item') {
                 const itemId = element.closest('.item').dataset.itemId;
                 const item = this.actor.items.get(itemId);
-                console.log("Roll type item",item);
-                if (item) return item.roll();
+                if (item) return item.roll(dataset.rollCategory);
             }
         }
         
         // Handle rolls that supply the formula directly.
         if (dataset.roll) {
-            console.log("PAR ICI",dataset.truc);
             let label = dataset.label ? `Jet de ${dataset.label}` : '';
             let roll = new Roll(dataset.roll, this.actor.getRollData());
             roll.toMessage({
@@ -182,5 +173,20 @@ console.log("\n\nCONFIG\n\n",CONFIG);
         }
     }
     
+
+    _getItemIcon(type){
+        switch(type){
+            case 'weapon':
+                return CONFIG.PARALLEA.images.sword;
+            case 'armor':
+                return CONFIG.PARALLEA.images.shield;
+            case 'spell':
+                return CONFIG.PARALLEA.images.lightning;
+            case 'skill':
+                return CONFIG.PARALLEA.images.book;
+            default:
+                return CONFIG.PARALLEA.images.itemBag;
+        }
+    }
 }
 

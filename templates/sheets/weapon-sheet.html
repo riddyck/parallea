@@ -6,12 +6,32 @@
     <div>
         <table>
             <tr>
+                <th>Type d'attaque</th>
                 <th>Rune</th>
                 <th>Dé de l'arme</th>
                 <th>Enchantable</th>
+                <th>Base d'attaque</th>
             </tr>
             
             <tr>
+                <td>
+                    <select name="system.attributs.type" >
+                        {{#select system.attributs.type}}
+                        {{#each config.weapon_types as |name type|}}
+                        <option value="{{type}}">{{name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </td>
+                <td>
+                    <input name="system.damage.dice_damage" type="text" value="{{system.damage.dice_damage}}" data-dtype="Number" />
+                </td>
+                <td>
+                    <input name="system.runes.runable" type="checkbox" {{checked system.runes.runable}} />
+                </td>
+                <td>
+                    <input name="system.attack.base" type="text" value="{{system.attack.base}}" data-dtype="Number" />
+                </td>
                 <td>
                     <select name="system.rune_type" >
                         {{#select system.rune_type}}
@@ -20,12 +40,6 @@
                         {{/each}}
                         {{/select}}
                     </select>
-                </td>
-                <td>
-                    <input name="system.dice_damage" type="text" value="{{system.dice_damage}}" data-dtype="Number" />
-                </td>
-                <td>
-                    <input name="system.runable" type="checkbox" {{checked system.runable}} /><span class="weapon-damage-mod rollable" data-roll="d@damage.dice_damage" data-label="TAPER">Taper ?</span>
                 </td>
             </tr>
             <span class="weapon-damage-mod rollable" data-roll="d@damage.dice_damage" data-label="TAPER">Taper ?</span>

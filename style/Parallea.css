@@ -364,7 +364,7 @@
   display: flex;
   -webkit-box-flex: 0;
   -ms-flex: 0 0 120px;
-  flex: 0 0 200px;
+  flex: 0 0 20%;
   -webkit-box-pack: end;
   -ms-flex-pack: end;
   justify-content: flex-end;
@@ -425,6 +425,13 @@
   -webkit-box-flex: 0;
   -ms-flex: 0 0 200px;
   flex: 0 0 200px;
+  padding: 0 8px;
+}
+
+.parallea .item-announce {
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 20%;
+  flex: 0 0 20%;
   padding: 0 8px;
 }
 .parallea .effects .item .effect-source,
