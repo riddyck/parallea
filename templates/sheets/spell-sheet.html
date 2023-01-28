@@ -1,0 +1,18 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
+        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Nom du sort"/></h1>
+        <h1><input name="system.attributs.level" type="text" value="{{item.system.attributs.level}}" placeholder="1"/></h1>
+    </header>    
+    <div>
+
+        <nav class="sheet-tabs tabs" data-group="primary">
+            <a class="item" data-tab="features">Résumé</a>
+            <a class="item" data-tab="settings">Paramètres</a>
+        </nav>
+        <section class="sheet-body">
+            <div class="tab features active" data-group="primary" data-tab="features">{{>"systems/parallea/templates/navTabs/item/spellFeatures.html"}}</div>
+            <div class="tab settings" data-group="primary" data-tab="settings">{{>"systems/parallea/templates/navTabs/item/spellSettings.html"}}</div>
+        </section>
+    </div>
+</form>

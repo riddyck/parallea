@@ -76,7 +76,6 @@ export class ParalleaActorSheet extends ActorSheet{
         
     // Assign and return
     context.arsenal = arsenal;
-    console.log("Arsenal",arsenal);
     context.gear = gear;
     context.skills = skills;
     context.spells = spells;

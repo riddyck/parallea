@@ -235,6 +235,51 @@
     "runes_number":0,
     "rune_type":""
   },
+  "spell":{
+    "attack":{
+      "base":0,
+      "label": "Attaque"
+    },
+    "damage":{
+      "dice_damage":0,
+      "multiplier":1,
+      "base":0
+    },
+    "attributs":{
+      "level":1,
+      "type": "mag"
+    },
+    "special":{
+      "precision":{
+        "active": false,
+        "label": "Précision"
+      },
+      "shattering":{
+        "active": false,
+        "label": "Brise armure"
+      },
+      "burn":{
+        "active": false,
+        "value":0,
+        "label": "Brulure"
+      },
+      "frosbite":{
+        "active": false,
+        "value":0,
+        "label": "Engelure"
+      },
+      "bleed":{
+        "active": false,
+        "value":0,
+        "label": "Saignement"
+      },
+      "stun":{
+        "active": false,
+        "value":0,
+        "label": "Assomant"
+      }
+    }
+  },
   "description":""
 }
 }

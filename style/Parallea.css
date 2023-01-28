@@ -1,5 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 /* Global styles */
+
+.separation {
+    padding: 0px 0px 5px;
+    border-bottom: 2px solid #c9c7b8;
+}
+
 .window-app {
   font-family: "Roboto", sans-serif;
 }
@@ -23,7 +29,6 @@
 .ressource-grid {
   margin: 0px 0;
 }
-
 
 .grid-3col {
   grid-column: span 3/span 3;
@@ -430,8 +435,8 @@
 
 .parallea .item-announce {
   -webkit-box-flex: 0;
-  -ms-flex: 0 0 20%;
-  flex: 0 0 20%;
+  -ms-flex: auto;
+  flex: auto;
   padding: 0 8px;
 }
 .parallea .effects .item .effect-source,

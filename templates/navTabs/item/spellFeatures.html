@@ -1,0 +1,27 @@
+<table>
+    <tr>
+        <th>Base d'attaque</th>
+        <th>Type d'attaque</th>
+        <th>Dé de dégâts</th>
+    </tr>
+    
+    <tr>
+        <td>
+            <input name="system.attack.base" type="text" value="{{system.attack.base}}" data-dtype="Number" />
+        </td>
+        <td>
+            <select name="system.attributs.type" >
+                {{#select system.attributs.type}}
+                {{#each config.weapon_types as |name type|}}
+                <option value="{{type}}">{{name}}</option>
+                {{/each}}
+                {{/select}}
+            </select>
+        </td>
+        <td>
+            <input name="system.damage.dice_damage" type="text" value="{{system.damage.dice_damage}}" data-dtype="Number" />
+        </td>
+    </tr>
+</table>
+<p>Descritpion de l'arme:</p>
+<textarea name = "system.description">{{system.description}}</textarea>

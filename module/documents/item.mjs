@@ -102,7 +102,7 @@ export class ParalleaItem extends Item {
           break;
         case 'spell':
           this._computeSpellData();
-          this.formula="d20+"+this.system.attack.value.toString();
+          this.formula="d"+this.system.damage.dice_damage.toString()+"+"+this.system.damage.value.toString();
           break;
         case 'skill':
           this._computeSkillData();
@@ -122,26 +122,48 @@ export class ParalleaItem extends Item {
     console.log("Trace attributs type",data.attributs.type);
     
     if(data.attributs.type == "phy"){
-      console.log("Trace magique attack value",actorData.mechanics.attack.mag.value);
       data.attack.value = data.attack.base + actorData.mechanics.attack.phy.value;
       data.damage.value = data.damage.base + actorData.mechanics.damage.phy.value;
     }
     else if(data.attributs.type == "ran"){
-      console.log("Trace magique attack value",actorData.mechanics.attack.mag.value);
       data.attack.value = data.attack.base + actorData.mechanics.attack.ran.value;
       data.damage.value = data.damage.base + actorData.mechanics.damage.ran.value;
     }
     else if(data.attributs.type == "mag"){
-      console.log("Trace magique attack value",actorData.mechanics.attack.mag.value);
       data.attack.value = data.attack.base + actorData.mechanics.attack.mag.value;
       data.damage.value = data.damage.base + actorData.mechanics.damage.mag.value;
     }
     console.log("data Compute weapon",data);
   }
+
+
+  
   
   
   _computeArmorData(){}
-  _computeSpellData(){}
+
+
+  _computeSpellData(){
+    const actorData = this.parent.system;
+    const data = this.system;
+    console.log("Trace Spell data atributs type",data.attributs.type);
+    
+    if(data.attributs.type == "phy"){
+      data.attack.value = data.attack.base + actorData.mechanics.attack.phy.value;
+      data.damage.value = data.damage.base + data.damage.multiplier*actorData.mechanics.damage.phy.value;
+    }
+    else if(data.attributs.type == "ran"){
+      data.attack.value = data.attack.base + actorData.mechanics.attack.ran.value;
+      data.damage.value = data.damage.base + data.damage.multiplier*actorData.mechanics.damage.ran.value;
+    }
+    else if(data.attributs.type == "mag"){
+      data.attack.value = data.attack.base + actorData.mechanics.attack.mag.value;
+      data.damage.value = data.damage.base + data.damage.multiplier*actorData.mechanics.damage.mag.value;
+    }
+    console.log("data Compute weapon",data);
+  }
+
+
   _computeSkillData(){}
   
 }
