@@ -1,7 +1,6 @@
 export const PARALLEA = {};
 
 PARALLEA.rune_type={
-    none: "",
     fire: "Feu",
     light: "Lumière",
     magic: "Magie",
@@ -9,10 +8,9 @@ PARALLEA.rune_type={
 }
 
 PARALLEA.rune_level={
-    none: "",
-    minor: "Mineure",
-    intermediary: "Intermédiaire",
-    major: "Majeure"
+    1: "Mineure",
+    2: "Intermédiaire",
+    3: "Majeure"
 }
 PARALLEA.table={
     character: "Personnage",
@@ -36,7 +34,8 @@ PARALLEA.images={
     angel : "icons/svg/angel.svg",
     shield : "icons/svg/shield.svg",
     lightning : "icons/svg/lightning.svg",
-    book : "icons/svg/book.svg"
+    book : "icons/svg/book.svg",
+    mageShield : "icons/svg/mage-shield.svg"
 }
 
 

@@ -20,7 +20,7 @@ export class ParalleaItemSheet extends ItemSheet{
     getData(){
         const context = super.getData();
         const itemData = this.item.toObject(false);
-
+        
         context.system = itemData.system;
         context.flags = itemData.flags;
         
@@ -36,11 +36,28 @@ export class ParalleaItemSheet extends ItemSheet{
         
         //Mettre config sert dans le cas de menus déroulant par exemple
         context.config= CONFIG.PARALLEA;
-
+        
         context.system = itemData.system;
         context.flags = itemData.flags;
 
+        if (!context.items) context.items=[];
+
         return context;
+    }
+    
+    _prepareRune(context) {
+        // Initialize containers.
+        const runes = [];
+        
+        // Iterate through items, allocating to containers
+        for (let i of context.items) {
+            i.img = i.img || DEFAULT_TOKEN;
+            runes.push(i);
+        }
+        
+        // Assign and return
+        context.runes = runes;
+        
     }
     
     
@@ -52,9 +69,61 @@ export class ParalleaItemSheet extends ItemSheet{
         
         // Everything below here is only needed if the sheet is editable
         if (!this.isEditable) return;
+
+
+
+        // Render the item sheet for viewing/editing prior to the editable check.
+        html.find('.item-edit').click(ev => {
+            const li = $(ev.currentTarget).parents(".item");
+            const item = this.actor.items.get(li.data("itemId"));
+            item.sheet.render(true);
+        });
+        
+        // -------------------------------------------------------------
+        // Everything below here is only needed if the sheet is editable
+        if (!this.isEditable) return;
+        
+        // Add Inventory Item
+        html.find('.item-create').click(this._onItemCreate.bind(this));
+        
+        // Delete Inventory Item
+        html.find('.item-delete').click(ev => {
+            const li = $(ev.currentTarget).parents(".item");
+            const item = this.actor.items.get(li.data("itemId"));
+            item.delete();
+            li.slideUp(200, () => this.render(false));
+        });
+        
+
+
         
         html.find('.rollable').click(this._onRoll.bind(this));
         // Roll handlers, click handlers, etc. would go here.
+    }
+    
+    async _onItemCreate(event) {
+
+        event.preventDefault();
+        const header = event.currentTarget;
+        // Get the type of item to create.
+        const type = header.dataset.type;
+        // Grab any data associated with this control.
+        const data = duplicate(header.dataset);
+        // Initialize a default name.
+        const name = `New ${type.capitalize()}`;
+        // Prepare the item object.
+        const itemData = {
+            name: name,
+            type: type,
+            system: data,
+            img: CONFIG.PARALLEA.images.mageShield
+        };
+        // Remove the type from the dataset since it's in the itemData.type prop.
+        delete itemData.system["type"];
+        
+        
+        // Finally, create the item!
+        return await Item.create(itemData, {parent: this.item});
     }
 
     _onRoll(event) {

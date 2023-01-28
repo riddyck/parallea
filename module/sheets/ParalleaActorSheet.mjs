@@ -41,6 +41,7 @@ export class ParalleaActorSheet extends ActorSheet{
         
         // Prepare active effects
         //context.effects = prepareActiveEffectCategories(this.actor.effects);
+        console.log("Actor context",context);
         return context;
     }
     

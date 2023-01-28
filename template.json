@@ -114,7 +114,7 @@
       },
       
       "progression":{
-
+        
         "specialisation":"",
         "level":1,
         
@@ -167,119 +167,161 @@
         }
       }
       
+      
+    },
+    "npc": "",
+    "monster":""
     
   },
-  "npc": "",
-  "monster":""
   
-},
-
-"Item": {
-  "types":[
-    "weapon",
-    "armor",
-    "spell",
-    "skill"
-  ],
-  "weapon":{
-    "attack":{
-      "base":0,
-      "label": "Attaque"
+  "Item": {
+    "types":[
+      "weapon",
+      "armor",
+      "spell",
+      "skill",
+      "rune"
+    ],
+    "weapon":{
+      "attack":{
+        "base":0,
+        "label": "Attaque"
+      },
+      "damage":{
+        "dice_damage":0,
+        "rune_damage":0,
+        "base":0
+      },
+      "defense":{
+        "base":0,
+        "parade": false
+      },
+      "runes":{
+        "runable": true,
+        "runes_number":0,
+        "runes_spots_number":1,
+        "rune_type":{}
+      },
+      "attributs":{
+        "hands":1,
+        "type": "phy"
+      },
+      "special":{
+        "precision":{
+          "value": false,
+          "label": "Précision"
+        },
+        "ambidextry":{
+          "value": false,
+          "label": "Ambidextrie"
+        },
+        "shattering":{
+          "value": false,
+          "label": "Brise armure"
+        },
+        "parade":{
+          "value": false,
+          "label": "Parade"
+        },
+        "no_2w_malus":{
+          "value": false,
+          "label": "Pas de malus au maniment de deux armes."
+        }
+      }
     },
-    "damage":{
-      "dice_damage":0,
-      "rune_damage":0,
-      "base":0
-    },
-    "defense":{
+    "armor":{
+      "atk":0,
       "def":0,
-      "parade": false
-    },
-    "runes":{
-      "runable": true,
+      "runable": false,
       "runes_number":0,
-      "runes_spots_number":1,
-      "rune_type":{}
+      "rune_type":""
     },
-    "attributs":{
-      "hands":1,
-      "type": "phy"
-    },
-    "special":{
-      "precision":{
-        "value": false,
-        "label": "Précision"
+    "spell":{
+      "attack":{
+        "base":0,
+        "label": "Attaque"
       },
-      "ambidextry":{
-        "value": false,
-        "label": "Ambidextrie"
+      "damage":{
+        "dice_damage":0,
+        "multiplier":1,
+        "base":0
       },
-      "shattering":{
-        "value": false,
-        "label": "Brise armure"
+      "attributs":{
+        "level":1,
+        "type": "mag"
       },
-      "parade":{
-        "value": false,
-        "label": "Parade"
-      },
-      "no_2w_malus":{
-        "value": false,
-        "label": "Pas de malus au maniment de deux armes."
+      "special":{
+        "precision":{
+          "active": false,
+          "label": "Précision"
+        },
+        "shattering":{
+          "active": false,
+          "label": "Brise armure"
+        },
+        "burn":{
+          "active": false,
+          "value":0,
+          "label": "Brulure"
+        },
+        "frosbite":{
+          "active": false,
+          "value":0,
+          "label": "Engelure"
+        },
+        "bleed":{
+          "active": false,
+          "value":0,
+          "label": "Saignement"
+        },
+        "stun":{
+          "active": false,
+          "value":0,
+          "label": "Assomant"
+        }
       }
-    }
-  },
-  "armor":{
-    "atk":0,
-    "def":0,
-    "runable": false,
-    "runes_number":0,
-    "rune_type":""
-  },
-  "spell":{
-    "attack":{
-      "base":0,
-      "label": "Attaque"
     },
-    "damage":{
-      "dice_damage":0,
-      "multiplier":1,
-      "base":0
-    },
-    "attributs":{
-      "level":1,
-      "type": "mag"
-    },
-    "special":{
-      "precision":{
-        "active": false,
-        "label": "Précision"
+    
+    "rune":{
+      "attributs":{
+        "level":1,
+        "type": "Tranchant"
       },
-      "shattering":{
-        "active": false,
-        "label": "Brise armure"
+      "attack":{
+        "phy":{
+          "bonus":0,
+          "armor":0,
+          "label": "Attaque physique"
+        },
+        "ran":{
+          "bonus":0,
+          "armor":0,
+          "label": "Attaque à distance"
+        },
+        "mag":{
+          "bonus":0,
+          "armor":0,
+          "label": "Attaque magique"
+        }
       },
-      "burn":{
-        "active": false,
-        "value":0,
-        "label": "Brulure"
+      "damage":{
+        "bonus":0,
+        "label": "Dommage"
       },
-      "frosbite":{
-        "active": false,
-        "value":0,
-        "label": "Engelure"
+      "def":{
+        "bonus":0,
+        "label": "Defense"
       },
-      "bleed":{
-        "active": false,
-        "value":0,
-        "label": "Saignement"
+      "arm":{
+        "bonus":0,
+        "label": "Armure"
       },
-      "stun":{
-        "active": false,
-        "value":0,
-        "label": "Assomant"
+      "rm":{
+        "bonus":0,
+        "label": "RM"
       }
-    }
-  },
-  "description":""
-}
+      
+    },
+    "description":""
+  }
 }
