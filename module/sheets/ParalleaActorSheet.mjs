@@ -57,7 +57,7 @@ export class ParalleaActorSheet extends ActorSheet{
             i.img = i.img || DEFAULT_TOKEN;
             // Append weapons to arsenal.
             if (i.type === 'weapon') {
-                arsenal.push(i);
+                arsenal.push({object:i,value:context.system.equipment[i._id]});
             }
             // Append armors to gear.
             else if (i.type === 'armor') {
@@ -73,12 +73,12 @@ export class ParalleaActorSheet extends ActorSheet{
             }
         }
         
-    // Assign and return
-    context.arsenal = arsenal;
-    context.gear = gear;
-    context.skills = skills;
-    context.spells = spells;
-
+        // Assign and return
+        context.arsenal = arsenal;
+        context.gear = gear;
+        context.skills = skills;
+        context.spells = spells;
+        
     }
     
     
@@ -115,7 +115,7 @@ export class ParalleaActorSheet extends ActorSheet{
         
         //Listen Rollable Items
         html.find('.rollable').click(this._onRoll.bind(this));
-
+        
         
         //Listen Rollable Items
         html.find('.equiped').click(this._onEquipWeapon.bind(this));
@@ -124,7 +124,7 @@ export class ParalleaActorSheet extends ActorSheet{
     
     
     async _onItemCreate(event) {
-
+        
         event.preventDefault();
         const header = event.currentTarget;
         // Get the type of item to create.
@@ -173,7 +173,7 @@ export class ParalleaActorSheet extends ActorSheet{
             return roll;
         }
     }
-
+    
     _onEquipWeapon(event){
         event.preventDefault();
         const element = event.currentTarget;
@@ -181,19 +181,19 @@ export class ParalleaActorSheet extends ActorSheet{
         this.object.collections.items.get(dataset.weapon)._reverseEquipped();
     }
     
-
+    
     _getItemIcon(type){
         switch(type){
             case 'weapon':
-                return CONFIG.PARALLEA.images.sword;
+            return CONFIG.PARALLEA.images.sword;
             case 'armor':
-                return CONFIG.PARALLEA.images.shield;
+            return CONFIG.PARALLEA.images.shield;
             case 'spell':
-                return CONFIG.PARALLEA.images.lightning;
+            return CONFIG.PARALLEA.images.lightning;
             case 'skill':
-                return CONFIG.PARALLEA.images.book;
+            return CONFIG.PARALLEA.images.book;
             default:
-                return CONFIG.PARALLEA.images.itemBag;
+            return CONFIG.PARALLEA.images.itemBag;
         }
     }
 }

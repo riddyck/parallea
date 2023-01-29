@@ -7,12 +7,20 @@ export class ParalleaActor extends Actor {
   
   prepareData(){
     super.prepareData();
-    console.log("On cherche le source du parent aussi tant qu'à faire",this);
   }
   
   /** @override */
   prepareBaseData() {
-    console.log("Data actor",this)
+    const iterItem = this.items.keys();
+    const itemKeys=[];
+    var k = iterItem.next();
+    while(!k.done){
+      itemKeys.push(k.value);
+      k = iterItem.next();
+    }
+    for (let key of Object.keys(this.system.equipment)) if (!(itemKeys.includes(key))) delete this.system.equipment[key];
+    
+    //delete this.system.equipment['0'] ;
     // Data modifications in this step occur before processing embedded
     // documents or derived data.
   }
@@ -163,7 +171,7 @@ export class ParalleaActor extends Actor {
   }
 
   _computeAmbidextry(systemData){
-    
+
   }
   
   

@@ -206,7 +206,6 @@
       "attributs":{
         "hands":1,
         "type": "phy",
-        "equiped": true,
         "mainHand": true
       },
       "special":{

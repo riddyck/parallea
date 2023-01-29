@@ -20,7 +20,6 @@ export class ParalleaItem extends Item {
   */
   async roll(rollCategory) {
     const item = this;
-    console.log("trace roll category ", rollCategory);
     
     // Initialize chat data.
     const speaker = ChatMessage.getSpeaker({ actor: this.actor });
@@ -94,7 +93,6 @@ export class ParalleaItem extends Item {
         case 'weapon':
         this._computeWeaponData();
         this.formula="d"+this.system.damage.dice_damage.toString()+"+"+this.system.damage.value.toString();
-        console.log("tformule damage ", this.formula);
         break;
         case 'armor':
         this._computeArmorData();
@@ -119,7 +117,6 @@ export class ParalleaItem extends Item {
   _computeWeaponData(){
     const actorData = this.parent.system;
     const data = this.system;
-    console.log("Trace attributs type",data.attributs.type);
     
     if(data.attributs.type == "phy"){
       data.attack.value = data.attack.base + actorData.mechanics.attack.phy.value;
@@ -133,7 +130,6 @@ export class ParalleaItem extends Item {
       data.attack.value = data.attack.base + actorData.mechanics.attack.mag.value;
       data.damage.value = data.damage.base + actorData.mechanics.damage.mag.value;
     }
-    console.log("data Compute weapon",data);
   }
   
   
@@ -146,7 +142,6 @@ export class ParalleaItem extends Item {
   _computeSpellData(){
     const actorData = this.parent.system;
     const data = this.system;
-    console.log("Trace Spell data atributs type",data.attributs.type);
     
     if(data.attributs.type == "phy"){
       data.attack.value = data.attack.base + actorData.mechanics.attack.phy.value;
@@ -160,7 +155,6 @@ export class ParalleaItem extends Item {
       data.attack.value = data.attack.base + actorData.mechanics.attack.mag.value;
       data.damage.value = data.damage.base + data.damage.multiplier*actorData.mechanics.damage.mag.value;
     }
-    console.log("data Compute weapon",data);
   }
   
   

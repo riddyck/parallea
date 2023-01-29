@@ -18,13 +18,9 @@ export class ParalleaItemSheet extends ItemSheet{
     
     
     getData(){
-        console.log("getData",this);
         const context = super.getData();
         const itemData = this.item.toObject(false);
 
-    
-        console.log("getData itrem data",itemData);
-        
         context.system = itemData.system;
         context.flags = itemData.flags;
         
@@ -87,8 +83,6 @@ export class ParalleaItemSheet extends ItemSheet{
         
         // Add Inventory Item
         html.find('.item-create').click(this._onItemCreate.bind(this));
-
-        html.find('.test').click(this._onTest.bind(this));
         
         // Delete Inventory Item
         html.find('.item-delete').click(ev => {
@@ -155,14 +149,6 @@ export class ParalleaItemSheet extends ItemSheet{
             });
             return roll;
         }
-    }
-
-    _onTest(event){
-        console.log("Avant",this);
-        console.log("Avant",this.object.system.special.ambidextry);
-        this.object._reverseEquipped();
-        console.log("Après",this.object.system.special.ambidextry);
-        return 0;
     }
     
 }
