@@ -7,10 +7,12 @@ export class ParalleaActor extends Actor {
   
   prepareData(){
     super.prepareData();
+    console.log("On cherche le source du parent aussi tant qu'à faire",this);
   }
   
   /** @override */
   prepareBaseData() {
+    console.log("Data actor",this)
     // Data modifications in this step occur before processing embedded
     // documents or derived data.
   }
@@ -40,6 +42,7 @@ export class ParalleaActor extends Actor {
       return;
     }
     const systemData = actorData.system;
+    systemData.chargeForm=false;
     
     for(let [key, attribut] of Object.entries(systemData.attributs)){
       attribut.mod = Math.floor(attribut.value/10-5);
@@ -157,6 +160,10 @@ export class ParalleaActor extends Actor {
     dmg.phy.value = dmg.phy.base + dmg.phy.bonus + progression.attack.physic_investment.value;
     dmg.ran.value = dmg.ran.base + dmg.ran.bonus + progression.attack.range_investment.value;
     dmg.mag.value = dmg.mag.base + dmg.mag.bonus + progression.attack.magic_investment.value;
+  }
+
+  _computeAmbidextry(systemData){
+    
   }
   
   

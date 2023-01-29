@@ -165,7 +165,8 @@
             "label": "Investissement en "
           }
         }
-      }
+      },
+      "equipment":{}
       
       
     },
@@ -204,7 +205,9 @@
       },
       "attributs":{
         "hands":1,
-        "type": "phy"
+        "type": "phy",
+        "equiped": true,
+        "mainHand": true
       },
       "special":{
         "precision":{

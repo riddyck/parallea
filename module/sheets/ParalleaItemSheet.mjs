@@ -11,15 +11,19 @@ export class ParalleaItemSheet extends ItemSheet{
     }
     
     get template(){
-        console.log(`${this.item.type}`);
+
         return `systems/parallea/templates/sheets/${this.item.type}-sheet.html`;
     }
     
     
     
     getData(){
+        console.log("getData",this);
         const context = super.getData();
         const itemData = this.item.toObject(false);
+
+    
+        console.log("getData itrem data",itemData);
         
         context.system = itemData.system;
         context.flags = itemData.flags;
@@ -70,8 +74,6 @@ export class ParalleaItemSheet extends ItemSheet{
         // Everything below here is only needed if the sheet is editable
         if (!this.isEditable) return;
 
-
-
         // Render the item sheet for viewing/editing prior to the editable check.
         html.find('.item-edit').click(ev => {
             const li = $(ev.currentTarget).parents(".item");
@@ -85,6 +87,8 @@ export class ParalleaItemSheet extends ItemSheet{
         
         // Add Inventory Item
         html.find('.item-create').click(this._onItemCreate.bind(this));
+
+        html.find('.test').click(this._onTest.bind(this));
         
         // Delete Inventory Item
         html.find('.item-delete').click(ev => {
@@ -131,10 +135,8 @@ export class ParalleaItemSheet extends ItemSheet{
         const element = event.currentTarget;
         const dataset = element.dataset;
         
-        console.log(dataset);
         // Handle item rolls.
         if (dataset.rollType) {
-            console.log(dataset.rollType);
             if (dataset.rollType == 'item') {
                 const itemId = element.closest('.item').dataset.itemId;
                 const item = this.actor.items.get(itemId);
@@ -151,9 +153,16 @@ export class ParalleaItemSheet extends ItemSheet{
                 flavor: label,
                 rollMode: game.settings.get('core', 'rollMode')
             });
-            console.log(roll.toMessage);
             return roll;
         }
+    }
+
+    _onTest(event){
+        console.log("Avant",this);
+        console.log("Avant",this.object.system.special.ambidextry);
+        this.object._reverseEquipped();
+        console.log("Après",this.object.system.special.ambidextry);
+        return 0;
     }
     
 }

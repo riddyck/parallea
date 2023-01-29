@@ -10,7 +10,6 @@ export class ParalleaActorSheet extends ActorSheet{
     }
     
     get template(){
-        //console.log(`${this.actor.type}`);
         return `systems/parallea/templates/sheets/${this.actor.type}-sheet.html`
     }
     
@@ -41,7 +40,6 @@ export class ParalleaActorSheet extends ActorSheet{
         
         // Prepare active effects
         //context.effects = prepareActiveEffectCategories(this.actor.effects);
-        console.log("Actor context",context);
         return context;
     }
     
@@ -117,6 +115,10 @@ export class ParalleaActorSheet extends ActorSheet{
         
         //Listen Rollable Items
         html.find('.rollable').click(this._onRoll.bind(this));
+
+        
+        //Listen Rollable Items
+        html.find('.equiped').click(this._onEquipWeapon.bind(this));
         
     }
     
@@ -149,7 +151,6 @@ export class ParalleaActorSheet extends ActorSheet{
         event.preventDefault();
         const element = event.currentTarget;
         const dataset = element.dataset;
-        console.log("Dataset",dataset);
         
         // Handle item rolls.
         if (dataset.rollType) {
@@ -171,6 +172,13 @@ export class ParalleaActorSheet extends ActorSheet{
             });
             return roll;
         }
+    }
+
+    _onEquipWeapon(event){
+        event.preventDefault();
+        const element = event.currentTarget;
+        const dataset = element.dataset;
+        this.object.collections.items.get(dataset.weapon)._reverseEquipped();
     }
     
 

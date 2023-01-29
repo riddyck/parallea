@@ -9,8 +9,8 @@ export class ParalleaItem extends Item {
     super.prepareData();
   }
   
-  
   prepareDerivedData(){
+    //this.system.attributs.equiped=this._equiped;
   }
   
   /**
@@ -69,48 +69,48 @@ export class ParalleaItem extends Item {
     if(rollCategory == "attack"){
       switch(this.type){
         case 'weapon':
-          this._computeWeaponData();
-          this.formula="d20+"+this.system.attack.value.toString();
-          break;
+        this._computeWeaponData();
+        this.formula="d20+"+this.system.attack.value.toString();
+        break;
         case 'armor':
-          this._computeArmorData();
-          this.formula="d20+"+this.system.attack.value.toString();
-          break;
+        this._computeArmorData();
+        this.formula="d20+"+this.system.attack.value.toString();
+        break;
         case 'spell':
-          this._computeSpellData();
-          this.formula="d20+"+this.system.attack.value.toString();
-          break;
+        this._computeSpellData();
+        this.formula="d20+"+this.system.attack.value.toString();
+        break;
         case 'skill':
-          this._computeSkillData();
-          this.formula="d20+"+this.system.attack.value.toString();
-          break;
+        this._computeSkillData();
+        this.formula="d20+"+this.system.attack.value.toString();
+        break;
         default:
-          this.formula="d1";
-          break;
+        this.formula="d1";
+        break;
       }
     }
     else if (rollCategory == "damage"){
       switch(this.type){
         case 'weapon':
-          this._computeWeaponData();
-          this.formula="d"+this.system.damage.dice_damage.toString()+"+"+this.system.damage.value.toString();
-          console.log("tformule damage ", this.formula);
-          break;
+        this._computeWeaponData();
+        this.formula="d"+this.system.damage.dice_damage.toString()+"+"+this.system.damage.value.toString();
+        console.log("tformule damage ", this.formula);
+        break;
         case 'armor':
-          this._computeArmorData();
-          this.formula="d20+"+this.system.attack.value.toString();
-          break;
+        this._computeArmorData();
+        this.formula="d20+"+this.system.attack.value.toString();
+        break;
         case 'spell':
-          this._computeSpellData();
-          this.formula="d"+this.system.damage.dice_damage.toString()+"+"+this.system.damage.value.toString();
-          break;
+        this._computeSpellData();
+        this.formula="d"+this.system.damage.dice_damage.toString()+"+"+this.system.damage.value.toString();
+        break;
         case 'skill':
-          this._computeSkillData();
-          this.formula="d20+"+this.system.attack.value.toString();
-          break;
+        this._computeSkillData();
+        this.formula="d20+"+this.system.attack.value.toString();
+        break;
         default:
-          this.formula="d1";
-          break;
+        this.formula="d1";
+        break;
       }
     }
   }
@@ -135,14 +135,14 @@ export class ParalleaItem extends Item {
     }
     console.log("data Compute weapon",data);
   }
-
-
+  
+  
   
   
   
   _computeArmorData(){}
-
-
+  
+  
   _computeSpellData(){
     const actorData = this.parent.system;
     const data = this.system;
@@ -162,8 +162,8 @@ export class ParalleaItem extends Item {
     }
     console.log("data Compute weapon",data);
   }
-
-
-  _computeSkillData(){}
   
+  
+  _computeSkillData(){}
+
 }
