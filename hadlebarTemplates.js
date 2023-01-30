@@ -9,6 +9,11 @@ export const preloadHandlebarsTemplates = async function() {
 		"systems/parallea/templates/navTabs/item/weaponFeatures.html",
 		"systems/parallea/templates/navTabs/item/weaponSettings.html",
 		"systems/parallea/templates/navTabs/item/weaponRunes.html",
+
+		"systems/parallea/templates/navTabs/item/armorFeatures.html",
+		"systems/parallea/templates/navTabs/item/armorSettings.html",
+		"systems/parallea/templates/navTabs/item/armorRunes.html",
+
 		"systems/parallea/templates/navTabs/item/spellFeatures.html",
 		"systems/parallea/templates/navTabs/item/spellSettings.html"
     ];

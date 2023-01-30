@@ -35,7 +35,8 @@ PARALLEA.images={
     shield : "icons/svg/shield.svg",
     lightning : "icons/svg/lightning.svg",
     book : "icons/svg/book.svg",
-    mageShield : "icons/svg/mage-shield.svg"
+    mageShield : "icons/svg/mage-shield.svg",
+    chestplate : "icons/svg/chestplate.svg"
 }
 
 

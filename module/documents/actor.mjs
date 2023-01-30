@@ -55,12 +55,24 @@ export class ParalleaActor extends Actor {
     for(let [key, attribut] of Object.entries(systemData.attributs)){
       attribut.mod = Math.floor(attribut.value/10-5);
     }
-
+    
     this._computeMechanicsDefense(systemData);
     this._computeMechanicsRessources(systemData);
     this._computeMechanicsAttack(systemData);
     this._computeMechanicsDamage(systemData);
-    
+
+    this.system.twoWeapons = false;
+
+    var wCount = 0;
+
+    for (let key of Object.keys(systemData.equipment)) {
+      console.log("equipmeent trouvé", systemData.equipment[key]);
+      if (systemData.equipment[key] && this.items.get(key).type=='weapon'){
+        if(!this.items.get(key).system.special.no_2w_malus.value) wCount++;
+      }
+    }
+    if(wCount>1) this.system.twoWeapons = true;
+    console.log(this.system);
     
   }
   
@@ -112,13 +124,16 @@ export class ParalleaActor extends Actor {
     const mechanics = systemData.mechanics;
     const progression = systemData.progression;
     
+    
     //---Calculating mechanics.defense----
     
+    var gear = this._computeGearDefense(systemData);
+
     const defense = mechanics.defense;
     
-    defense.def.value = Math.floor(attributs.dex.value/5) + progression.defense.def_investment.value + defense.def.armor + defense.def.bonus; 
-    defense.arm.value = Math.floor((attributs.str.value-50)/5) + 2*progression.defense.arm_investment.value + defense.arm.armor + defense.arm.armor
-    defense.mr.value = Math.floor((attributs.int.value-50)/5) + 2*progression.defense.mr_investment.value + defense.mr.armor + defense.mr.armor
+    defense.def.value = Math.floor(attributs.dex.value/5) + progression.defense.def_investment.value + defense.def.bonus + gear[0]; 
+    defense.arm.value = Math.floor((attributs.str.value-50)/5) + 2*progression.defense.arm_investment.value + defense.arm.bonus + gear[1];
+    defense.mr.value = Math.floor((attributs.int.value-50)/5) + 2*progression.defense.mr_investment.value + defense.mr.bonus + gear[2];
   }
   _computeMechanicsRessources(systemData){
     const mechanics = systemData.mechanics;
@@ -139,6 +154,8 @@ export class ParalleaActor extends Actor {
     const progression = systemData.progression;
     
     //---Calculating mechanics.attack----
+
+    var gear = this._computeGearAttack(systemData);
     
     const atk = mechanics.attack;
     
@@ -146,9 +163,9 @@ export class ParalleaActor extends Actor {
     atk.ran.base =  Math.floor((attributs.dex.value-50)/10);
     atk.mag.base =  Math.floor((attributs.int.value-50)/10);
     
-    atk.phy.value = atk.phy.base + atk.phy.bonus + atk.phy.armor + progression.attack.physic_investment.value;
-    atk.ran.value = atk.ran.base + atk.ran.bonus + atk.ran.armor + progression.attack.range_investment.value;
-    atk.mag.value = atk.mag.base + atk.mag.bonus + atk.mag.armor + progression.attack.magic_investment.value;
+    atk.phy.value = atk.phy.base + atk.phy.bonus + atk.phy.armor + progression.attack.physic_investment.value + gear[0];
+    atk.ran.value = atk.ran.base + atk.ran.bonus + atk.ran.armor + progression.attack.range_investment.value + gear[1];
+    atk.mag.value = atk.mag.base + atk.mag.bonus + atk.mag.armor + progression.attack.magic_investment.value + gear[2];
   }
   
   
@@ -169,13 +186,49 @@ export class ParalleaActor extends Actor {
     dmg.ran.value = dmg.ran.base + dmg.ran.bonus + progression.attack.range_investment.value;
     dmg.mag.value = dmg.mag.base + dmg.mag.bonus + progression.attack.magic_investment.value;
   }
-
+  
   _computeAmbidextry(systemData){
-
+    
+  }
+  
+  _computeGearAttack(systemData){
+    var gear_phy = 0;
+    var gear_ran = 0;
+    var gear_mag = 0;
+    
+    for (let key of Object.keys(systemData.equipment)) {
+      if (systemData.equipment[key]){
+        if(this.items.get(key).type=='armor'){
+          gear_phy+=this.items.get(key).system.attack.phy.base + this.items.get(key).system.attack.global.base;
+          gear_ran+=this.items.get(key).system.attack.ran.base + this.items.get(key).system.attack.global.base;
+          gear_mag+=this.items.get(key).system.attack.mag.base + this.items.get(key).system.attack.global.base;
+        }
+        else if(this.items.get(key).type=='weapon'){
+          gear_phy+=this.items.get(key).system.attack.phy.bonus;
+          gear_ran+=this.items.get(key).system.attack.ran.bonus;
+          gear_mag+=this.items.get(key).system.attack.mag.bonus;
+        }
+      }
+    }
+    return([gear_phy,gear_ran,gear_mag]);
   }
   
   
-  
-  
+  _computeGearDefense(systemData){
+    var gear_def = 0;
+    var gear_arm = 0;
+    var gear_mr = 0;
+    
+    for (let key of Object.keys(systemData.equipment)) {
+      if (systemData.equipment[key]){
+        gear_def+=this.items.get(key).system.defense.base;
+        if(this.items.get(key).type=='armor'){
+          gear_arm+=this.items.get(key).system.arm.base;
+          gear_mr+=this.items.get(key).system.mr.base;
+        }
+      }
+    }
+    return([gear_def,gear_arm,gear_mr]);
+  }
   
 }

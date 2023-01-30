@@ -14,6 +14,7 @@ export class ParalleaActorSheet extends ActorSheet{
     }
     
     getData(){
+        console.log(this);
         const context = super.getData();
         const actorData = this.actor.toObject(false);
         
@@ -61,7 +62,7 @@ export class ParalleaActorSheet extends ActorSheet{
             }
             // Append armors to gear.
             else if (i.type === 'armor') {
-                gear.push(i);
+                gear.push({object:i,value:context.system.equipment[i._id]});
             }
             // Append to skills.
             else if (i.type === 'skill') {
@@ -115,11 +116,7 @@ export class ParalleaActorSheet extends ActorSheet{
         
         //Listen Rollable Items
         html.find('.rollable').click(this._onRoll.bind(this));
-        
-        
-        //Listen Rollable Items
-        html.find('.equiped').click(this._onEquipWeapon.bind(this));
-        
+
     }
     
     
@@ -173,15 +170,7 @@ export class ParalleaActorSheet extends ActorSheet{
             return roll;
         }
     }
-    
-    _onEquipWeapon(event){
-        event.preventDefault();
-        const element = event.currentTarget;
-        const dataset = element.dataset;
-        this.object.collections.items.get(dataset.weapon)._reverseEquipped();
-    }
-    
-    
+        
     _getItemIcon(type){
         switch(type){
             case 'weapon':

@@ -186,7 +186,19 @@
     "weapon":{
       "attack":{
         "base":0,
-        "label": "Attaque"
+        "label": "Attaque",
+        "phy":{
+          "bonus":0,
+          "label": "Bonus physique"
+        },
+        "ran":{
+          "bonus":0,
+          "label": "Bonus à distance"
+        },
+        "mag":{
+          "bonus":0,
+          "label": "Bonus magique"
+        }
       },
       "damage":{
         "dice_damage":0,
@@ -232,11 +244,42 @@
       }
     },
     "armor":{
-      "atk":0,
-      "def":0,
-      "runable": false,
-      "runes_number":0,
-      "rune_type":""
+      "attack":{
+        "global":{
+          "base":0,
+          "label": "Modificateur d'attaque"
+        },
+        "phy":{
+          "base":0,
+          "label": "Modificateur physique"
+        },
+        "ran":{
+          "base":0,
+          "label": "Modificateur à distance"
+        },
+        "mag":{
+          "base":0,
+          "label": "Modificateur magique"
+        }
+      },
+      "defense":{
+        "base":0,
+        "parade": false
+      },
+      "runes":{
+        "runable": true,
+        "runes_number":0,
+        "runes_spots_number":1,
+        "rune_type":{}
+      },
+      "arm":{
+        "base":0,
+        "label": "Armure"
+      },
+      "mr":{
+        "base":0,
+        "label": "RM"
+      }
     },
     "spell":{
       "attack":{
