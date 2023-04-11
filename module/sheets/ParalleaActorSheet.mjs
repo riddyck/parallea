@@ -14,7 +14,6 @@ export class ParalleaActorSheet extends ActorSheet{
     }
     
     getData(){
-        console.log(this);
         const context = super.getData();
         const actorData = this.actor.toObject(false);
         
@@ -52,6 +51,7 @@ export class ParalleaActorSheet extends ActorSheet{
         const gear = [];
         const skills = [];
         const spells = [];
+        const assaults = [];
         
         // Iterate through items, allocating to containers
         for (let i of context.items) {
@@ -72,6 +72,10 @@ export class ParalleaActorSheet extends ActorSheet{
             else if (i.type === 'spell') {
                 spells.push(i);
             }
+            // Append to assaults.
+            else if (i.type === 'assault') {
+                assaults.push(i);
+            }
         }
         
         // Assign and return
@@ -79,6 +83,7 @@ export class ParalleaActorSheet extends ActorSheet{
         context.gear = gear;
         context.skills = skills;
         context.spells = spells;
+        context.assaults = assaults;
         
     }
     
@@ -181,6 +186,8 @@ export class ParalleaActorSheet extends ActorSheet{
             return CONFIG.PARALLEA.images.lightning;
             case 'skill':
             return CONFIG.PARALLEA.images.book;
+            case 'assault':
+            return CONFIG.PARALLEA.images.angel;
             default:
             return CONFIG.PARALLEA.images.itemBag;
         }

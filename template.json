@@ -121,15 +121,15 @@
         "defense":{
           "def_investment":{
             "value":0,
-            "label": "Investissement en physique"
+            "label": "Investissement en défense"
           },
           "arm_investment":{
             "value":0,
-            "label": "Investissement en distance"
+            "label": "Investissement en armure"
           },
           "mr_investment":{
             "value":0,
-            "label": "Investissement en magie"
+            "label": "Investissement en résistance magique"
           }
         },
         
@@ -181,7 +181,8 @@
       "armor",
       "spell",
       "skill",
-      "rune"
+      "rune",
+      "assault"
     ],
     "weapon":{
       "attack":{
@@ -201,6 +202,7 @@
         }
       },
       "damage":{
+        "dice_number":1,
         "dice_damage":0,
         "rune_damage":0,
         "base":0
@@ -213,7 +215,21 @@
         "runable": true,
         "runes_number":0,
         "runes_spots_number":1,
-        "rune_type":{}
+        "rune_type":{},
+        "runes":{
+          "0":{
+            "type":"",
+            "level":0
+          },
+          "1":{
+            "type":"",
+            "level":0
+          },
+          "2":{
+            "type":"",
+            "level":0
+          }
+        }
       },
       "attributs":{
         "hands":1,
@@ -270,7 +286,21 @@
         "runable": true,
         "runes_number":0,
         "runes_spots_number":1,
-        "rune_type":{}
+        "rune_type":{},
+        "runes":{
+          "0":{
+            "type":"",
+            "level":0
+          },
+          "1":{
+            "type":"",
+            "level":0
+          },
+          "2":{
+            "type":"",
+            "level":0
+          }
+        }
       },
       "arm":{
         "base":0,
@@ -288,8 +318,8 @@
       },
       "damage":{
         "dice_damage":0,
-        "multiplier":1,
-        "base":0
+        "dice_number":1,
+        "bonus_multiplier":1
       },
       "attributs":{
         "level":1,
@@ -323,6 +353,61 @@
           "active": false,
           "value":0,
           "label": "Assomant"
+        }
+      }
+    },
+
+    "assault":{
+      "attack_bonus":{
+        "bonus":0,
+        "label": "Attaque"
+      },
+      "damage_roll_bonus":{
+        "dice_number":1,
+        "dice_damage":0
+      },
+      "damage_bonus":{
+        "bonus_multiplier":1,
+        "global_multiplier":1,
+        "bonus":0
+      },
+      "attributs":{
+        "level":1,
+        "type": "mag"
+      },
+      "special":{
+        "precision":{
+          "active": false,
+          "label": "Précision"
+        },
+        "shattering":{
+          "active": false,
+          "label": "Brise armure"
+        },
+        "burn":{
+          "active": false,
+          "value":0,
+          "label": "Brulure"
+        },
+        "frosbite":{
+          "active": false,
+          "value":0,
+          "label": "Engelure"
+        },
+        "bleed":{
+          "active": false,
+          "value":0,
+          "label": "Saignement"
+        },
+        "stun":{
+          "active": false,
+          "value":0,
+          "label": "Assomant"
+        },
+        "hybride":{
+          "active": false,
+          "value":0,
+          "label": "Dégât hybrides"
         }
       }
     },

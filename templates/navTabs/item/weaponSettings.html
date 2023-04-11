@@ -1,4 +1,4 @@
-<table>
+<table class="flexrow flex-group-center">
     <tr>
         <th>{{system.attack.phy.label}}</th>
         <th>{{system.attack.ran.label}}</th>
@@ -17,3 +17,31 @@
         </td>
     </tr>
 </table>
+
+<div class="flexcol">
+    <div class="flexrow flex-group-center">
+        <label for="system.damage.base" class="flexrow">Dégâts bonus: : </label>
+        <input name = "system.damage.base" type="text" value="{{system.damage.base}}" data-dtype="Number" />
+    </div>
+    <div class="flexrow flex-group-center">
+        <label for="system.damage.dice_number" class="flexrow">Nombres de dés de dégât : </label>
+        <input name = "system.damage.dice_number" type="text" value="{{system.damage.dice_number}}" data-dtype="Number" />
+    </div>
+</div>
+<br>
+<p>Effets:</p>
+{{#each system.special as |special key|}}
+<div class="flexcol">
+    <div class="flexrow flex-group-center">
+        <label for="system.special.{{key}}.value" class="flexrow">{{special.label}}: </label>
+        <input name = "system.special.{{key}}.value" type="checkbox" {{checked special.value}}/>
+    </div>
+</div>
+{{/each}}
+<br>
+<div class="flexcol">
+    <div class="flexrow flex-group-center">
+        <label for="system.attributs.hands" class="flexrow">Nombre de main pour l'arme: </label>
+        <input name = "system.attributs.hands" type="text" value="{{system.attributs.hands}}" data-dtype="Number" />
+    </div>
+</div>

@@ -2,10 +2,6 @@
     
     <div class="abilities flexcol">
         <div class="ability flexrow flex-group-center">
-            <span>Ressource secondaire: <input name="system.mechanics.ressources.ressource.display" type="checkbox" {{checked system.mechanics.ressources.ressource.display}}/>  </span>
-        {{#if system.mechanics.ressources.ressource.display}}<input name="system.mechanics.ressources.ressource.label" type="text" value="{{system.mechanics.ressources.ressource.label}}"/>{{/if}}
-        </div>
-        <div class="ability flexrow flex-group-center">
             <label for="system.mechanics.ressources.hp.base" class="resource-label" >Base {{system.mechanics.ressources.hp.label}}</label>
             <input name="system.mechanics.ressources.hp.base" value="{{system.mechanics.ressources.hp.base}}" type="text" data-dtype="Number"/>
         </div>
@@ -13,12 +9,6 @@
             <label for="system.mechanics.ressources.mana.base" class="resource-label" >Base {{system.mechanics.ressources.mana.label}}</label>
             <input name="system.mechanics.ressources.mana.base" value="{{system.mechanics.ressources.mana.base}}" type="text" data-dtype="Number"/>
         </div>
-        {{#if system.mechanics.ressources.ressource.display}}
-        <div class="ability flexrow flex-group-center">
-            <label for="system.mechanics.ressources.ressource.base" class="resource-label" >Base {{system.mechanics.ressources.ressource.label}}</label>
-            <input name="system.mechanics.ressources.ressource.base" value="{{system.mechanics.ressources.ressource.base}}" type="text" data-dtype="Number"/>
-        </div>
-        {{/if}}
         <div class="ability flexrow flex-group-center">
             <label for="system.progression.ressources.hp_up.value" class="resource-label" >{{system.progression.ressources.hp_up.label}}</label>
             <input name="system.progression.ressources.hp_up.value" value="{{system.progression.ressources.hp_up.value}}" type="text" data-dtype="Number"/>
@@ -27,13 +17,59 @@
             <label for="system.progression.ressources.mana_up.value" class="resource-label" >{{system.progression.ressources.mana_up.label}}</label> 
             <input name="system.progression.ressources.mana_up.value" value="{{system.progression.ressources.mana_up.value}}" type="text" data-dtype="Number"/>
         </div>
+        <div class="ability flexrow flex-group-center">
+            <span>Ressource secondaire: <input name="system.mechanics.ressources.ressource.display" type="checkbox" {{checked system.mechanics.ressources.ressource.display}}/>  </span>
+        {{#if system.mechanics.ressources.ressource.display}}<input name="system.mechanics.ressources.ressource.label" type="text" value="{{system.mechanics.ressources.ressource.label}}"/>{{/if}}
+        </div>
         {{#if system.mechanics.ressources.ressource.display}}
+        <div class="ability flexrow flex-group-center">
+            <label for="system.mechanics.ressources.ressource.base" class="resource-label" >Base {{system.mechanics.ressources.ressource.label}}</label>
+            <input name="system.mechanics.ressources.ressource.base" value="{{system.mechanics.ressources.ressource.base}}" type="text" data-dtype="Number"/>
+        </div>
         <div class="ability flexrow flex-group-center">
             <label for="system.progression.ressources.ressource_up.value" class="resource-label" >{{system.progression.ressources.ressource_up.label}} {{system.mechanics.ressources.ressource.label}}</label> 
             <input name="system.progression.ressources.ressource_up.value" value="{{system.progression.ressources.ressource_up.value}}" type="text" data-dtype="Number"/>
         </div>
         {{/if}}
         
+    </div>
+
+    <hr>
+
+    <div class="abilities flexcol">
+        
+        <div class="ability flexrow flex-group-center">
+            <label for="system.progression.attack.physic_investment.value" class="resource-label" >{{system.progression.attack.physic_investment.label}}</label>
+            <input name="system.progression.attack.physic_investment.value" value="{{system.progression.attack.physic_investment.value}}" type="text" data-dtype="Number"/>
+        </div>
+        <div class="ability flexrow flex-group-center">
+            <label for="system.progression.attack.range_investment.value" class="resource-label" >{{system.progression.attack.range_investment.label}}</label>
+            <input name="system.progression.attack.range_investment.value" value="{{system.progression.attack.range_investment.value}}" type="text" data-dtype="Number"/>
+        </div>
+        <div class="ability flexrow flex-group-center">
+            <label for="system.progression.attack.magic_investment.value" class="resource-label" >{{system.progression.attack.magic_investment.label}}</label>
+            <input name="system.progression.attack.magic_investment.value" value="{{system.progression.attack.magic_investment.value}}" type="text" data-dtype="Number"/>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="abilities flexcol">
+        
+        <div class="ability flexrow flex-group-center">
+            <label for="system.progression.defense.arm_investment.value" class="resource-label" >{{system.progression.defense.arm_investment.label}}</label>
+            <input name="system.progression.defense.arm_investment.value" value="{{system.progression.defense.arm_investment.value}}" type="text" data-dtype="Number"/>
+        </div>
+        
+        <div class="ability flexrow flex-group-center">
+            <label for="system.progression.defense.mr_investment.value" class="resource-label" >{{system.progression.defense.mr_investment.label}}</label>
+            <input name="system.progression.defense.mr_investment.value" value="{{system.progression.defense.mr_investment.value}}" type="text" data-dtype="Number"/>
+        </div>
+        
+        <div class="ability flexrow flex-group-center">
+            <label for="system.progression.defense.def_investment.value" class="resource-label" >{{system.progression.defense.def_investment.label}}</label>
+            <input name="system.progression.defense.def_investment.value" value="{{system.progression.defense.def_investment.value}}" type="text" data-dtype="Number"/>
+        </div>
     </div>
     
 </nav>

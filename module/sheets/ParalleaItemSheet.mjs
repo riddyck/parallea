@@ -32,7 +32,11 @@ export class ParalleaItemSheet extends ItemSheet{
             context.rollData = actor.getRollData();
         }
         
+        if (itemData.type == 'weapon' || itemData.type == 'armor'){
+            //this._prepareRune(context);
+        }
         
+        console.log("RUNES2",context);
         
         //Mettre config sert dans le cas de menus déroulant par exemple
         context.config= CONFIG.PARALLEA;
@@ -41,17 +45,18 @@ export class ParalleaItemSheet extends ItemSheet{
         context.flags = itemData.flags;
 
         if (!context.items) context.items=[];
-
         return context;
     }
     
     _prepareRune(context) {
         // Initialize containers.
         const runes = [];
+
+        console.log("RUNES",context);
         
         // Iterate through items, allocating to containers
-        for (let i of context.items) {
-            i.img = i.img || DEFAULT_TOKEN;
+        for (let i of context.system.runes.runes) {
+            //i.img = i.img || DEFAULT_TOKEN;
             runes.push(i);
         }
         

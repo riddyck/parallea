@@ -66,13 +66,12 @@ export class ParalleaActor extends Actor {
     var wCount = 0;
 
     for (let key of Object.keys(systemData.equipment)) {
-      console.log("equipmeent trouvé", systemData.equipment[key]);
       if (systemData.equipment[key] && this.items.get(key).type=='weapon'){
-        if(!this.items.get(key).system.special.no_2w_malus.value) wCount++;
+        if(!this.items.get(key).system.special.no_2w_malus.value & this.items.get(key).system.attributs.hands==1) wCount++;
       }
     }
     if(wCount>1) this.system.twoWeapons = true;
-    console.log(this.system);
+    console.log(this);
     
   }
   
@@ -131,9 +130,18 @@ export class ParalleaActor extends Actor {
 
     const defense = mechanics.defense;
     
+
+    
     defense.def.value = Math.floor(attributs.dex.value/5) + progression.defense.def_investment.value + defense.def.bonus + gear[0]; 
     defense.arm.value = Math.floor((attributs.str.value-50)/5) + 2*progression.defense.arm_investment.value + defense.arm.bonus + gear[1];
     defense.mr.value = Math.floor((attributs.int.value-50)/5) + 2*progression.defense.mr_investment.value + defense.mr.bonus + gear[2];
+
+    /*
+    defense.def.value = Math.floor(attributs.dex.value/5) + progression.defense.arm_investment.value + progression.defense.mr_investment.value + defense.def.bonus + gear[0]; 
+    defense.arm.value = Math.floor((attributs.str.value-50)/5) + progression.defense.arm_investment.value + defense.arm.bonus + gear[1];
+    defense.mr.value = Math.floor((attributs.int.value-50)/5) + progression.defense.mr_investment.value + defense.mr.bonus + gear[2];
+*/
+
   }
   _computeMechanicsRessources(systemData){
     const mechanics = systemData.mechanics;
@@ -186,11 +194,7 @@ export class ParalleaActor extends Actor {
     dmg.ran.value = dmg.ran.base + dmg.ran.bonus + progression.attack.range_investment.value;
     dmg.mag.value = dmg.mag.base + dmg.mag.bonus + progression.attack.magic_investment.value;
   }
-  
-  _computeAmbidextry(systemData){
-    
-  }
-  
+ 
   _computeGearAttack(systemData){
     var gear_phy = 0;
     var gear_ran = 0;

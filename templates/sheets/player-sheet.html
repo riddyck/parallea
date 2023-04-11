@@ -28,25 +28,26 @@
             </div>
             {{/if}}
             {{/each}}
-            <label for="system.mechanics.defense.def.value" class="resource-label" >{{system.mechanics.defense.def.label}} : {{system.mechanics.defense.def.value}}</label>
-            <label for="system.mechanics.defense.arm.value" class="resource-label" >{{system.mechanics.defense.arm.label}} : {{system.mechanics.defense.arm.value}}</label>
-            <label for="system.mechanics.defense.mr.value" class="resource-label" >{{system.mechanics.defense.mr.label}} : {{system.mechanics.defense.mr.value}}</label>
+            <p>Armes équipées:</p>
+            {{#each arsenal as |item key|}}
+            {{#if item.value}}
+            <p>{{item.object.name}}</p>
+            {{/if}}
+            {{/each}}
 
-            <br>
-            <label for="system.mechanics.attack.phy.value" class="resource-label" >{{system.mechanics.attack.phy.label}} : {{system.mechanics.attack.phy.value}}</label>
-            <label for="system.mechanics.attack.ran.value" class="resource-label" >{{system.mechanics.attack.ran.label}} : {{system.mechanics.attack.ran.value}}</label>
-            <label for="system.mechanics.attack.mag.value" class="resource-label" >{{system.mechanics.attack.mag.label}} : {{system.mechanics.attack.mag.value}}</label>
         </div>
     </header>
     <nav class="sheet-tabs tabs" data-group="primary">
         <a class="item" data-tab="features">Résumé</a>
         <a class="item" data-tab="inventory">Inventaire</a>
+        <a class="item" data-tab="spells">Compétences</a>
         <a class="item" data-tab="lore">Histoire</a>
         <a class="item" data-tab="settings">Paramètres</a>
     </nav>
     <section class="sheet-body">
         <div class="tab features active" data-group="primary" data-tab="features">{{>"systems/parallea/templates/navTabs/actor/playerFeatures.html"}}</div>
         <div class="tab inventory" data-group="primary" data-tab="inventory">{{>"systems/parallea/templates/navTabs/actor/playerInventory.html"}}</div>
+        <div class="tab lore" data-group="primary" data-tab="spells">{{>"systems/parallea/templates/navTabs/actor/playerSpells.html"}}</div>
         <div class="tab lore" data-group="primary" data-tab="lore">{{>"systems/parallea/templates/navTabs/actor/playerLore.html"}}</div>
         <div class="tab settings" data-group="primary" data-tab="settings">{{>"systems/parallea/templates/navTabs/actor/playerSettings.html"}}</div>
     </section>
