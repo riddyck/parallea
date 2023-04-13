@@ -1,3 +1,7 @@
+import * as runesFunction from './runes.mjs';
+
+
+
 export class ParalleaItem extends Item {
   
   // Prepare data for the actor. Calling the super version of this executes
@@ -11,14 +15,40 @@ export class ParalleaItem extends Item {
   
   
   prepareBaseData(){
-    if(this.type == "weapon" || this.type == "armor"){
-      console.log("Heho par ici: ",this);
+    
+    //If the item is a weapon or an armor (ie runable) then loop into the runes, and make them visible depending on the number of runes on an item
+    this.system.runable = this.type == "weapon" || this.type == "armor";
+    if(this.system.runable){
+
+      this.system.runes.stats = {
+        "attack":{
+          "phy":0,
+          "ran":0,
+          "mag":0,
+          "global":0
+        },
+        "damage":{
+          "phy":0,
+          "ran":0,
+          "mag":0,
+          "global":0
+        },
+        "def":0,
+        "arm":0,
+        "rm":0,
+        "ressources":{
+          "hp":0,
+          "mana":0
+        }
+      }
+
+
       var limit = this.system.runes.runes_number;
       for(var k = 1; k <=Math.min(limit,3); k++){
         this.system.runes.runes[k].display = true;
+        this._computeRuneType(this.system.runes.stats,this.system.runes.runes[k]);
       }
-      const iterItem = this.system.runes.runes;
-      console.log("Et de deux: ",iterItem);
+      console.log("Après system:", this.system);
     }
   }
   prepareDerivedData(){
@@ -258,4 +288,16 @@ export class ParalleaItem extends Item {
   _computeFormula(){
   }
   
+  _computeRuneType(stats,rune){
+    switch (rune.type){
+      case 'fire':
+        runesFunction.firePrep(stats,rune);
+        break;
+      case 'edge':
+        runesFunction.edgePrep(stats,rune);
+        break;
+      default:
+        break;
+    }
+  }
 }

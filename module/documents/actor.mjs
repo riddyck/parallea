@@ -199,18 +199,23 @@ export class ParalleaActor extends Actor {
     var gear_phy = 0;
     var gear_ran = 0;
     var gear_mag = 0;
-    
+
     for (let key of Object.keys(systemData.equipment)) {
       if (systemData.equipment[key]){
-        if(this.items.get(key).type=='armor'){
-          gear_phy+=this.items.get(key).system.attack.phy.base + this.items.get(key).system.attack.global.base;
-          gear_ran+=this.items.get(key).system.attack.ran.base + this.items.get(key).system.attack.global.base;
-          gear_mag+=this.items.get(key).system.attack.mag.base + this.items.get(key).system.attack.global.base;
+        const item = this.items.get(key);
+        const itemAttack = item.system.attack;
+        const itemRunes = item.system.runes.stats;
+        console.log(item);
+        console.log(itemRunes);
+        if(item.type=='armor'){
+          gear_phy+=itemAttack.phy.base + itemAttack.global.base + itemRunes.attack.phy;
+          gear_ran+=itemAttack.ran.base + itemAttack.global.base + itemRunes.attack.ran;
+          gear_mag+=itemAttack.mag.base + itemAttack.global.base + itemRunes.attack.mag;
         }
-        else if(this.items.get(key).type=='weapon'){
-          gear_phy+=this.items.get(key).system.attack.phy.bonus;
-          gear_ran+=this.items.get(key).system.attack.ran.bonus;
-          gear_mag+=this.items.get(key).system.attack.mag.bonus;
+        else if(item.type=='weapon'){
+          gear_phy+=itemAttack.phy.bonus;
+          gear_ran+=itemAttack.ran.bonus;
+          gear_mag+=itemAttack.mag.bonus;
         }
       }
     }

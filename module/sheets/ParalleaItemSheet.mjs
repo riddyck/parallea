@@ -35,7 +35,6 @@ export class ParalleaItemSheet extends ItemSheet{
         //Mettre config sert dans le cas de menus déroulant par exemple
         context.config= CONFIG.PARALLEA;
         
-        console.log("AAAAAAAAAAAAAAAAAA",context.config);
         context.system = itemData.system;
         context.flags = itemData.flags;
 
