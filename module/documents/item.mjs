@@ -9,29 +9,18 @@ export class ParalleaItem extends Item {
     super.prepareData();
   }
   
- 
-  prepareBaseData(){
-    //this.system.attributs.equiped=this._equiped;
-    
-    /*
-  if(this.system.runes) {
-    const test = {
-      type: "feu",
-      niveau: 3
-  };
-
-  this.system.runes.runes.push(test);
   
-
-  const test2 = {
-      type: "eau",
-      niveau: 4
-  };
-  this.system.runes.runes.push(test2);
-  console.log("ICI",this);
-  }*/
+  prepareBaseData(){
+    if(this.type == "weapon" || this.type == "armor"){
+      console.log("Heho par ici: ",this);
+      var limit = this.system.runes.runes_number;
+      for(var k = 1; k <=Math.min(limit,3); k++){
+        this.system.runes.runes[k].display = true;
+      }
+      const iterItem = this.system.runes.runes;
+      console.log("Et de deux: ",iterItem);
+    }
   }
-
   prepareDerivedData(){
     //this.system.attributs.equiped=this._equiped;
   }
@@ -132,10 +121,10 @@ export class ParalleaItem extends Item {
         
         
         console.log("Heho",this.system.damage);
-
-
-
-
+        
+        
+        
+        
         this.formula=this.system.damage.weapon_dice_number.toString()+"d"+this.system.damage.weapon_dice_damage.toString();
         this.formula+="+"+this.system.itemDamage.toString();
         
@@ -152,7 +141,7 @@ export class ParalleaItem extends Item {
   }
   
   /*Compute les data d'une arme, en se basant sur le type de l'arme, puis en vérifiant si l'arme est à une ou deux mains*/
-
+  
   _computeWeaponData(){
     const actorData = this.parent.system;
     const data = this.system;
@@ -237,7 +226,7 @@ export class ParalleaItem extends Item {
       assaultData.damage={};
       assaultData.damage.weapon_dice_number=itemData.damage.dice_number;
       assaultData.damage.weapon_dice_damage=itemData.damage.dice_damage;
-
+      
       if(itemData.attributs.type == "phy"){
         assaultData.itemAttack = itemData.attack.base + actorData.mechanics.attack.phy.value;
         assaultData.itemDamage = itemData.damage.base + actorData.mechanics.damage.phy.value;
