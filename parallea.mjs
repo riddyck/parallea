@@ -24,8 +24,6 @@ Hooks.once("init", function (){
     CONFIG.Actor.documentClass = ParalleaActor;
     CONFIG.Item.documentClass = ParalleaItem;
 
-    console.log("EEE3",CONFIG);
-    
     Handlebars.registerHelper('times', function(n, block) {
         var accum = '';
         for(var i = 0; i < n; ++i) {

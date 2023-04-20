@@ -222,10 +222,11 @@
             "display":false,
             "rune_type":{
               "none": "Non gravée",
-              "fire": "Feu",
-              "light": "Lumière",
-              "magic": "Magie",
-              "edge": "Tranchant"
+              
+              "edge": "Tranchant",
+              "power": "Puissance",
+              "hardness": "Dureté",
+              "fire": "Feu"
             },
             "level_label":{
               "1": "Mineure",
@@ -239,10 +240,11 @@
             "display":false,
             "rune_type":{
               "none": "Non gravée",
-              "fire": "Feu",
-              "light": "Lumière",
-              "magic": "Magie",
-              "edge": "Tranchant"
+              
+              "edge": "Tranchant",
+              "power": "Puissance",
+              "hardness": "Dureté",
+              "fire": "Feu"
             },
             "level_label":{
               "1": "Mineure",
@@ -256,10 +258,11 @@
             "display":false,
             "rune_type":{
               "none": "Non gravée",
-              "fire": "Feu",
-              "light": "Lumière",
-              "magic": "Magie",
-              "edge": "Tranchant"
+              
+              "edge": "Tranchant",
+              "power": "Puissance",
+              "hardness": "Dureté",
+              "fire": "Feu"
             },
             "level_label":{
               "1": "Mineure",
@@ -331,10 +334,15 @@
             "display":false,
             "rune_type":{
               "none": "Non gravée",
-              "fire": "Feu",
-              "light": "Lumière",
-              "magic": "Magie",
-              "edge": "Tranchant"
+          
+              "resistance": "Resistance",
+              "protection": "Protection",
+              "reinforce": "Renforcement",
+          
+              "mana": "Mana",
+              "magicPower": "Puissance Magique",
+              "magicFocus": "Concentration Magique",
+              "magicOvercharge": "Surcharge Magique"
             },
             "level_label":{
               "1": "Mineure",
@@ -348,10 +356,15 @@
             "display":false,
             "rune_type":{
               "none": "Non gravée",
-              "fire": "Feu",
-              "light": "Lumière",
-              "magic": "Magie",
-              "edge": "Tranchant"
+          
+              "resistance": "Resistance",
+              "protection": "Protection",
+              "reinforce": "Renforcement",
+          
+              "mana": "Mana",
+              "magicPower": "Puissance Magique",
+              "magicFocus": "Concentration Magique",
+              "magicOvercharge": "Surcharge Magique"
             },
             "level_label":{
               "1": "Mineure",
@@ -365,10 +378,15 @@
             "display":false,
             "rune_type":{
               "none": "Non gravée",
-              "fire": "Feu",
-              "light": "Lumière",
-              "magic": "Magie",
-              "edge": "Tranchant"
+          
+              "resistance": "Resistance",
+              "protection": "Protection",
+              "reinforce": "Renforcement",
+          
+              "mana": "Mana",
+              "magicPower": "Puissance Magique",
+              "magicFocus": "Concentration Magique",
+              "magicOvercharge": "Surcharge Magique"
             },
             "level_label":{
               "1": "Mineure",

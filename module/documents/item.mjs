@@ -33,22 +33,22 @@ export class ParalleaItem extends Item {
           "mag":0,
           "global":0
         },
-        "def":0,
-        "arm":0,
-        "rm":0,
+        "defense":{
+          "def":0,
+          "arm":0,
+          "rm":0
+        },
         "ressources":{
           "hp":0,
           "mana":0
         }
       }
 
-
       var limit = this.system.runes.runes_number;
       for(var k = 1; k <=Math.min(limit,3); k++){
         this.system.runes.runes[k].display = true;
         this._computeRuneType(this.system.runes.stats,this.system.runes.runes[k]);
       }
-      console.log("Après system:", this.system);
     }
   }
   prepareDerivedData(){
@@ -137,34 +137,29 @@ export class ParalleaItem extends Item {
     else if (rollCategory == "damage"){
       switch(this.type){
         case 'weapon':
-        this._computeWeaponData();
-        this.formula=this.system.damage.dice_number.toString()+"d"+this.system.damage.dice_damage.toString();
-        this.formula+="+"+this.system.damage.value.toString();
-        break;
+          this._computeWeaponData();
+          this.formula=this.system.damage.dice_number.toString()+"d"+this.system.damage.dice_damage.toString();
+          this.formula+="+"+this.system.damage.value.toString();
+          break;
         case 'spell':
-        this._computeSpellData();
-        this.formula=this.system.damage.dice_number.toString()+"d"+this.system.damage.dice_damage.toString();
-        this.formula+="+"+this.system.damage.bonus_multiplier.toString()+"*"+this.system.damage.value.toString();
-        break;
+          this._computeSpellData();
+          this.formula=this.system.damage.dice_number.toString()+"d"+this.system.damage.dice_damage.toString();
+          this.formula+="+"+this.system.damage.bonus_multiplier.toString()+"*"+this.system.damage.value.toString();
+          break;
         case 'assault':
-        this._computeAssaultData();
+          this._computeAssaultData();
         
         
-        console.log("Heho",this.system.damage);
+          this.formula=this.system.damage.weapon_dice_number.toString()+"d"+this.system.damage.weapon_dice_damage.toString();
+          this.formula+="+"+this.system.itemDamage.toString();
         
+          this.formula+="+"+this.system.damage_roll_bonus.dice_number.toString()+"d"+this.system.damage_roll_bonus.dice_damage.toString();
+          this.formula+="+"+this.system.damage_bonus.bonus_multiplier*this.system.damage_bonus.bonus.toString();
         
-        
-        
-        this.formula=this.system.damage.weapon_dice_number.toString()+"d"+this.system.damage.weapon_dice_damage.toString();
-        this.formula+="+"+this.system.itemDamage.toString();
-        
-        this.formula+="+"+this.system.damage_roll_bonus.dice_number.toString()+"d"+this.system.damage_roll_bonus.dice_damage.toString();
-        this.formula+="+"+this.system.damage_bonus.bonus_multiplier*this.system.damage_bonus.bonus.toString();
-        
-        if(this.system.damage_bonus.global_multiplier!=1) this.formula=this.system.damage_bonus.global_multiplier.toString()+"*("+this.formula.toString()+")";
-        break;
+          if(this.system.damage_bonus.global_multiplier!=1) this.formula=this.system.damage_bonus.global_multiplier.toString()+"*("+this.formula.toString()+")";
+          break;
         default:
-        this.formula="d1";
+            this.formula="d1";
         break;
       }
     }
@@ -173,6 +168,35 @@ export class ParalleaItem extends Item {
   /*Compute les data d'une arme, en se basant sur le type de l'arme, puis en vérifiant si l'arme est à une ou deux mains*/
   
   _computeWeaponData(){
+    const actorData = this.parent.system;
+    const data = this.system;
+    const rune = data.runes.stats;
+    
+    if(data.attributs.type == "phy"){
+      data.attack.value = data.attack.base + actorData.mechanics.attack.phy.value;
+      data.damage.value = actorData.mechanics.damage.phy.value;
+    }
+    else if(data.attributs.type == "ran"){
+      data.attack.value = data.attack.base + actorData.mechanics.attack.ran.value;
+      data.damage.value = actorData.mechanics.damage.ran.value;
+    }
+    else if(data.attributs.type == "mag"){
+      data.attack.value = data.attack.base + actorData.mechanics.attack.mag.value;
+      data.damage.value = actorData.mechanics.damage.mag.value;
+    }
+
+    data.attack.value += rune.attack.global;
+    data.damage.value += rune.damage.global;
+    
+    if (actorData.twoWeapons==true && data.attributs.hands == 1){
+      data.attack.value-=6;
+      if(data.attributs.mainHand == true) data.attack.value+=2;
+      if(data.special.ambidextry.value == true) data.attack.value+=2;
+    }
+    
+  }
+  
+  _computeSpellData(){
     const actorData = this.parent.system;
     const data = this.system;
     
@@ -187,34 +211,6 @@ export class ParalleaItem extends Item {
     else if(data.attributs.type == "mag"){
       data.attack.value = data.attack.base + actorData.mechanics.attack.mag.value;
       data.damage.value = actorData.mechanics.damage.mag.value;
-    }
-    
-    if (actorData.twoWeapons==true && data.attributs.hands == 1){
-      data.attack.value-=6;
-      if(data.attributs.mainHand == true) data.attack.value+=2;
-      if(data.special.ambidextry.value == true) data.attack.value+=2;
-    }
-    
-  }
-  
-  
-  
-  
-  _computeSpellData(){
-    const actorData = this.parent.system;
-    const data = this.system;
-    
-    if(data.attributs.type == "phy"){
-      data.attack.value = data.attack.base + actorData.mechanics.attack.phy.value;
-      data.damage.value = data.damage.multiplier*actorData.mechanics.damage.phy.value;
-    }
-    else if(data.attributs.type == "ran"){
-      data.attack.value = data.attack.base + actorData.mechanics.attack.ran.value;
-      data.damage.value = data.damage.multiplier*actorData.mechanics.damage.ran.value;
-    }
-    else if(data.attributs.type == "mag"){
-      data.attack.value = data.attack.base + actorData.mechanics.attack.mag.value;
-      data.damage.value = data.damage.multiplier*actorData.mechanics.damage.mag.value;
     }
   }
   
@@ -290,11 +286,44 @@ export class ParalleaItem extends Item {
   
   _computeRuneType(stats,rune){
     switch (rune.type){
+      case 'edge':
+        runesFunction.edgePrep(stats,rune);
+        break;
+      case 'power':
+        runesFunction.powerPrep(stats,rune);
+        break;
+      case 'hardness':
+        runesFunction.hardnessPrep(stats,rune);
+        break;
       case 'fire':
         runesFunction.firePrep(stats,rune);
         break;
-      case 'edge':
-        runesFunction.edgePrep(stats,rune);
+
+      case 'resistance':
+        runesFunction.resistancePrep(stats,rune);
+        break;
+      case 'protection':
+        runesFunction.protectionPrep(stats,rune);
+        break;
+      case 'reinforce':
+        runesFunction.reinforcePrep(stats,rune);
+        break;
+
+      case 'mana':
+        runesFunction.manaPrep(stats,rune);
+        break;
+      case 'magicPower':
+        runesFunction.magicPowerPrep(stats,rune);
+        break;
+      case 'magicFocus':
+        runesFunction.magicFocusPrep(stats,rune);
+        break;
+      case 'magicOvercharge':
+        runesFunction.magicOverchagePrep(stats,rune);
+        break;
+
+      case 'light':
+        runesFunction.lightPrep(stats,rune);
         break;
       default:
         break;

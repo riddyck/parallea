@@ -1,10 +1,19 @@
 export const PARALLEA = {};
 
 PARALLEA.rune_type={
+    edge: "Tranchant",
+    power: "Puissance",
+    hardness: "Dureté",
     fire: "Feu",
-    light: "Lumière",
-    magic: "Magie",
-    edge: "Tranchant"
+
+    resistance: "Resistance",
+    protection: "Protection",
+    reinforce: "Renforcement",
+
+    mana: "Mana",
+    magicPower: "Puissance Magique",
+    magicFocus: "Concentration Magique",
+    magicOvercharge: "Surcharge Magique"
 }
 
 PARALLEA.rune_level={
