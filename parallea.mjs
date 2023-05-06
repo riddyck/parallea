@@ -35,6 +35,10 @@ Hooks.once("init", function (){
         return accum;
     });
 
+    Handlebars.registerHelper('ifDiff', function(arg1, arg2, options) {
+        return (arg1 != arg2) ? options.fn(this) : options.inverse(this);
+    });
+
     Actors.unregisterSheet("core", ActorSheet);
     Actors.registerSheet("parallea", ParalleaActorSheet, {makeDefault:true});
     Items.unregisterSheet("core", ItemSheet);

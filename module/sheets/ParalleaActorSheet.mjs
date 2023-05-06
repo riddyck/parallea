@@ -52,6 +52,7 @@ export class ParalleaActorSheet extends ActorSheet{
         const skills = [];
         const spells = [];
         const assaults = [];
+        const stances = [];
         
         // Iterate through items, allocating to containers
         for (let i of context.items) {
@@ -76,6 +77,10 @@ export class ParalleaActorSheet extends ActorSheet{
             else if (i.type === 'assault') {
                 assaults.push(i);
             }
+            // Append to stances.
+            else if (i.type === 'stance') {
+                stances.push({object:i,value:context.system.equipment[i._id]});
+            }
         }
         
         // Assign and return
@@ -84,6 +89,7 @@ export class ParalleaActorSheet extends ActorSheet{
         context.skills = skills;
         context.spells = spells;
         context.assaults = assaults;
+        context.stances = stances;
         
     }
     
@@ -101,6 +107,8 @@ export class ParalleaActorSheet extends ActorSheet{
         html.find('.item-edit').click(ev => {
             const li = $(ev.currentTarget).parents(".item");
             const item = this.actor.items.get(li.data("itemId"));
+            console.log("ITEM",this.actor.items);
+            console.log("Truc",li.data("itemId"));
             item.sheet.render(true);
         });
         
@@ -161,10 +169,15 @@ export class ParalleaActorSheet extends ActorSheet{
                 const item = this.actor.items.get(itemId);
                 if (item) return item.roll(dataset.rollCategory);
             }
+            else if (dataset.rollType == 'attribut') {
+                console.log(dataset.rollAtt);
+                console.log("Object",this.object);
+                return this.object._rollAttribut(dataset.rollAtt);
+            }
         }
         
         // Handle rolls that supply the formula directly.
-        if (dataset.roll) {
+        else if (dataset.roll) {
             let label = dataset.label ? `Jet de ${dataset.label}` : '';
             let roll = new Roll(dataset.roll, this.actor.getRollData());
             roll.toMessage({
@@ -188,6 +201,8 @@ export class ParalleaActorSheet extends ActorSheet{
             return CONFIG.PARALLEA.images.book;
             case 'assault':
             return CONFIG.PARALLEA.images.angel;
+            case 'stance':
+            return CONFIG.PARALLEA.images.aura;
             default:
             return CONFIG.PARALLEA.images.itemBag;
         }

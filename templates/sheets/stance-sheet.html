@@ -1,0 +1,101 @@
+<form class="{{cssClass}}" autocomplete="off">
+    <header class="sheet-header">
+        <img src="{{item.img}}" data-edit="img" title="{{item.name}}" height="64" width="64"/>
+        <h1><input name="name" type="text" value="{{item.name}}" placeholder="Nom de l'arme"/></h1>
+    </header>
+    <div>
+        
+        Attaque
+        <table>
+            <tr><th class="flex-group-center">{{system.attack.global.label}}</th></tr>
+            <tr><td class="flex-group-center"><input name="system.attack.global.value" type="text" value="{{system.attack.global.value}}" data-dtype="Number"/></td></tr>
+            <tr>
+                {{#each system.attack as |attribut key|}}
+                {{#ifDiff key "global" }}
+                <th>{{attribut.label}}</th>
+                {{/ifDiff}}
+                {{/each}}
+            </tr>
+            <tr>
+                {{#each system.attack as |attribut key|}}
+                {{#ifDiff key "global" }}
+                <td class="flex-group-center">
+                    <input name="system.attack.{{key}}.value" type="text" value="{{attribut.value}}" data-dtype="Number" min="10" max="90"/>
+                    
+                </td>
+                {{/ifDiff}}
+                {{/each}}
+            </tr>
+        </table>
+        
+        Dommages
+        <table>
+            <tr><th class="flex-group-center">{{system.damage.global.label}}</th></tr>
+            <tr><td class="flex-group-center"><input name="system.damage.global.value" type="text" value="{{system.damage.global.value}}" data-dtype="Number"/></td></tr>
+            <tr>
+                {{#each system.damage as |attribut key|}}
+                {{#ifDiff key "global" }}
+                <th>{{attribut.label}}</th>
+                {{/ifDiff}}
+                {{/each}}
+            </tr>
+            <tr>
+                {{#each system.damage as |attribut key|}}
+                {{#ifDiff key "global" }}
+                <td class="flex-group-center">
+                    <input name="system.damage.{{key}}.value" type="text" value="{{attribut.value}}" data-dtype="Number" min="10" max="90"/>
+                    
+                </td>
+                {{/ifDiff}}
+                {{/each}}
+            </tr>
+        </table>
+        
+        Defense
+        <table>
+            <tr>
+                {{#each system.defense as |attribut key|}}
+                {{#ifDiff key "global" }}
+                <th>{{attribut.label}}</th>
+                {{/ifDiff}}
+                {{/each}}
+            </tr>
+            <tr>
+                {{#each system.defense as |attribut key|}}
+                {{#ifDiff key "global" }}
+                <td class="flex-group-center">
+                    <input name="system.defense.{{key}}.value" type="text" value="{{attribut.value}}" data-dtype="Number" min="10" max="90"/>
+                    
+                </td>
+                {{/ifDiff}}
+                {{/each}}
+            </tr>
+        </table>
+        
+        Carac
+        <table>
+            <tr><th class="flex-group-center">{{system.characteristics.global.label}}</th></tr>
+            <tr><td class="flex-group-center"><input name="system.characteristics.global.value" type="text" value="{{system.characteristics.global.value}}" data-dtype="Number"/></td></tr>
+            
+            <tr>
+                {{#each system.characteristics as |attribut key|}}
+                {{#ifDiff key "global" }}
+                <th>{{attribut.label}}</th>
+                {{/ifDiff}}
+                {{/each}}
+            </tr>
+            <tr>
+                {{#each system.characteristics as |attribut key|}}
+                {{#ifDiff key "global" }}
+                <td class="flex-group-center">
+                    <input name="system.characteristics.{{key}}.value" type="text" value="{{attribut.value}}" data-dtype="Number" min="10" max="90"/>
+                    
+                </td>
+                {{/ifDiff}}
+                {{/each}}
+            </tr>
+        </table>
+        
+    </div>
+    
+</form>

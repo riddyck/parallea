@@ -28,13 +28,27 @@
             </div>
             {{/if}}
             {{/each}}
-            <p>Armes équipées:</p>
-            {{#each arsenal as |item key|}}
-            {{#if item.value}}
-            <p>{{item.object.name}}</p>
-            {{/if}}
-            {{/each}}
-
+            
+            <div class="row">
+                <div class="column">
+                    <p>Armes équipées:</p>
+                    {{#each arsenal as |item key|}}
+                    {{#if item.value}}
+                    <p>{{item.object.name}}</p>
+                    {{/if}}
+                    {{/each}}
+                </div>
+                <div class="column">
+                    <select name="system.selectedStance" >
+                        {{#select system.selectedStance}}
+                        {{#each system.stances as |name id|}}
+                        <option value="{{id}}">{{name}}</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+            
         </div>
     </header>
     <nav class="sheet-tabs tabs" data-group="primary">

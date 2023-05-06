@@ -110,6 +110,61 @@
             "bonus":0,
             "label": "Dommages magiques"
           }
+        },
+        "posture":{
+          "none": {
+            "label" : "Sans posture",
+            "available" : true
+          },
+          
+          "focus" : {
+            "label" : "Focus",
+            "available" : true
+          },
+          "offens" : {
+            "label" : "Offensif",
+            "available" : true
+          },
+          "defence" : {
+            "label" : "Defensif",
+            "available" : true
+          },
+
+          "savage" : {
+            "label" : "Sauvage",
+            "available" : false
+          },
+
+          "fanatic" : {
+            "label" : "Fanatic",
+            "available" : false
+          },
+
+          "bear" : {
+            "label" : "Ours",
+            "available" : false
+          },
+          "crow" : {
+            "label" : "Corbeau",
+            "available" : false
+          },
+          "sylv" : {
+            "label" : "Sylvestre",
+            "available" : false
+          },
+          
+          "astel1" : {
+            "label" : "Ours",
+            "available" : false
+          },
+          "astel2" : {
+            "label" : "Corbeau",
+            "available" : false
+          },
+          "astel3" : {
+            "label" : "Sylvestre",
+            "available" : false
+          }
         }
       },
       
@@ -166,7 +221,9 @@
           }
         }
       },
-      "equipment":{}
+      "equipment":{},
+      "stances":{},
+      "selectedStance":""
       
       
     },
@@ -181,7 +238,7 @@
       "armor",
       "spell",
       "skill",
-      "rune",
+      "stance",
       "assault"
     ],
     "weapon":{
@@ -506,46 +563,95 @@
       }
     },
     
-    "rune":{
+    "stance":{
       "attributs":{
-        "level":1,
-        "type": "Tranchant"
+        "label": "Sans posture",
+        "available": true
       },
+
+      "defense":{
+        "def":{
+          "value":0,
+          "label": "Défense"
+        },
+        "arm":{
+          "value":0,
+          "label": "Armure"
+        },
+        "mr":{
+          "value":0,
+          "label": "RM"
+        }
+      },
+      
       "attack":{
+        "global":{
+          "value":0,
+          "label": "Attaque"
+        },
         "phy":{
-          "bonus":0,
-          "armor":0,
+          "value":0,
           "label": "Attaque physique"
         },
         "ran":{
-          "bonus":0,
-          "armor":0,
+          "value":0,
           "label": "Attaque à distance"
         },
         "mag":{
-          "bonus":0,
-          "armor":0,
+          "value":0,
           "label": "Attaque magique"
         }
       },
-      "damage":{
-        "bonus":0,
-        "label": "Dommage"
-      },
-      "def":{
-        "bonus":0,
-        "label": "Defense"
-      },
-      "arm":{
-        "bonus":0,
-        "label": "Armure"
-      },
-      "rm":{
-        "bonus":0,
-        "label": "RM"
-      }
       
-    },
-    "description":""
+      "damage":{
+        "global":{
+          "value":0,
+          "label": "Dommages"
+        },
+        "phy":{
+          "value":0,
+          "label": "Dommages physiques"
+        },
+        "ran":{
+          "value":0,
+          "label": "Dommages à distance"
+        },
+        "mag":{
+          "value":0,
+          "label": "Dommages magiques"
+        }
+      },
+
+      "characteristics":{
+        "global":{
+          "value": 0,
+          "label": "Bonus de caractéristique global"
+        }, 
+        "str": {
+          "value": 0,
+          "label": "Force"
+        },
+        "dex": {
+          "value": 0,
+          "label": "Dextérité"
+        },
+        "int": {
+          "value": 0,
+          "label": "Intelligence"
+        },
+        "wis": {
+          "value": 0,
+          "label": "Sagesse"
+        },
+        "stl": {
+          "value": 0,
+          "label": "Discrétion"
+        },
+        "cha": {
+          "value": 0,
+          "label": "Charisme"
+        }
+      }
+    }
   }
 }

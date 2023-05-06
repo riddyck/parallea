@@ -46,7 +46,8 @@ PARALLEA.images={
     book : "icons/svg/book.svg",
     mageShield : "icons/svg/mage-shield.svg",
     chestplate : "icons/svg/chestplate.svg",
-    assault : "icons/svg/assault.svg"
+    assault : "icons/svg/assault.svg",
+    aura : "icons/svg/aura.svg"
 }
 
 
@@ -54,4 +55,11 @@ PARALLEA.weapon_types={
     phy : "Physique",
     ran : "Distance",
     mag : "Magique"
+}
+
+PARALLEA.posture={
+    focus : "Focus",
+    offens : "Offensif",
+    defence : "Defensif",
+    none: "Sans posture"
 }
