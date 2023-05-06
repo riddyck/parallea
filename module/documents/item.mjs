@@ -66,7 +66,7 @@ export class ParalleaItem extends Item {
     // Initialize chat data.
     const speaker = ChatMessage.getSpeaker({ actor: this.actor });
     const rollMode = game.settings.get('core', 'rollMode');
-    const label = `[${item.type}] ${item.name}`;
+    const label = `${item.name}`;
     
     // If there's no roll data, send a chat message.
     
@@ -171,19 +171,9 @@ export class ParalleaItem extends Item {
     const actorData = this.parent.system;
     const data = this.system;
     const rune = data.runes.stats;
-    
-    if(data.attributs.type == "phy"){
-      data.attack.value = data.attack.base + actorData.mechanics.attack.phy.value;
-      data.damage.value = actorData.mechanics.damage.phy.value;
-    }
-    else if(data.attributs.type == "ran"){
-      data.attack.value = data.attack.base + actorData.mechanics.attack.ran.value;
-      data.damage.value = actorData.mechanics.damage.ran.value;
-    }
-    else if(data.attributs.type == "mag"){
-      data.attack.value = data.attack.base + actorData.mechanics.attack.mag.value;
-      data.damage.value = actorData.mechanics.damage.mag.value;
-    }
+
+    data.attack.value = data.attack.base + actorData.mechanics.attack[data.attributs.type].value;
+    data.damage.value = actorData.mechanics.damage[data.attributs.type].value;
 
     data.attack.value += rune.attack.global;
     data.damage.value += rune.damage.global;
@@ -200,19 +190,9 @@ export class ParalleaItem extends Item {
     const actorData = this.parent.system;
     const data = this.system;
     
-    if(data.attributs.type == "phy"){
-      data.attack.value = data.attack.base + actorData.mechanics.attack.phy.value;
-      data.damage.value = actorData.mechanics.damage.phy.value;
-    }
-    else if(data.attributs.type == "ran"){
-      data.attack.value = data.attack.base + actorData.mechanics.attack.ran.value;
-      data.damage.value = actorData.mechanics.damage.ran.value;
-    }
-    else if(data.attributs.type == "mag"){
-      data.attack.value = data.attack.base + actorData.mechanics.attack.mag.value;
-      data.damage.value = actorData.mechanics.damage.mag.value;
-    }
-  }
+    data.attack.value = data.attack.base + actorData.mechanics.attack[data.attributs.type].value;
+    data.damage.value = actorData.mechanics.damage[data.attributs.type].value;
+}
   
   _computeAssaultData(){
     const actorData = this.parent.system;
@@ -253,24 +233,11 @@ export class ParalleaItem extends Item {
       assaultData.damage.weapon_dice_number=itemData.damage.dice_number;
       assaultData.damage.weapon_dice_damage=itemData.damage.dice_damage;
       
-      if(itemData.attributs.type == "phy"){
-        assaultData.itemAttack = itemData.attack.base + actorData.mechanics.attack.phy.value;
-        assaultData.itemDamage = itemData.damage.base + actorData.mechanics.damage.phy.value;
-        assaultData.damage_bonus.bonus = actorData.mechanics.damage.phy.value;
-      }
-      else if(itemData.attributs.type == "ran"){
-        assaultData.itemAttack = itemData.attack.base + actorData.mechanics.attack.ran.value;
-        assaultData.itemDamage = itemData.damage.base + actorData.mechanics.damage.ran.value + assaultData.damage_bonus.bonus;
-        assaultData.damage_bonus.bonus = actorData.mechanics.damage.ran.value;
-      }
-      else if(itemData.attributs.type == "mag"){
-        assaultData.itemAttack = itemData.attack.base + actorData.mechanics.attack.mag.value;
-        assaultData.itemDamage = itemData.damage.base + actorData.mechanics.damage.mag.value;
-        assaultData.damage_bonus.bonus = actorData.mechanics.damage.mag.value;
-      }
+      assaultData.itemAttack = itemData.attack.base + actorData.mechanics.attack[data.attributs.type].value;
+      assaultData.itemDamage = itemData.damage.base + actorData.mechanics.damage[data.attributs.type].value;
+      assaultData.damage_bonus.bonus = actorData.mechanics.damage[data.attributs.type].value;
       
       if (actorData.twoWeapons==true && itemData.attributs.hands == 1){
-        console.log("Il se passe quoi ?",itemData);
         assaultData.attack_bonus.value-=6;
         if(itemData.attributs.mainHand == true) assaultData.attack_bonus.value+=2;
         if(itemData.special.ambidextry.value == true) assaultData.attack_bonus.value+=2;
