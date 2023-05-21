@@ -139,19 +139,26 @@ export class ParalleaActor extends Actor {
     const defense = mechanics.defense;
     
     
+    let stance = this._noStance().defense;
+    if (this.system.selectedStance!='0') stance = this.collections.items.get(this.system.selectedStance).system.defense;
     
-    defense.def.value = Math.floor(attributs.dex.value/5) + progression.defense.def_investment.value + defense.def.bonus + gear[0]; 
-    defense.arm.value = Math.floor((attributs.str.value-50)/5) + 2*progression.defense.arm_investment.value + defense.arm.bonus + gear[1];
-    defense.mr.value = Math.floor((attributs.int.value-50)/5) + 2*progression.defense.mr_investment.value + defense.mr.bonus + gear[2];
     
+    
+    defense.def.value = Math.floor(attributs.dex.value/10) + Math.floor(attributs.wis.value/10) + progression.defense.def_investment.value + defense.def.bonus + gear[0] + stance.def.value; 
+    defense.arm.value = Math.floor((attributs.str.value-50)/5) + 2*progression.defense.arm_investment.value + defense.arm.bonus + gear[1] + stance.arm.value;
+    defense.mr.value = Math.floor((attributs.arc.value-50)/5) + 2*progression.defense.mr_investment.value + defense.mr.bonus + gear[2] + stance.mr.value;
+    
+
+
     /*
     defense.def.value = Math.floor(attributs.dex.value/5) + progression.defense.arm_investment.value + progression.defense.mr_investment.value + defense.def.bonus + gear[0]; 
     defense.arm.value = Math.floor((attributs.str.value-50)/5) + progression.defense.arm_investment.value + defense.arm.bonus + gear[1];
-    defense.mr.value = Math.floor((attributs.int.value-50)/5) + progression.defense.mr_investment.value + defense.mr.bonus + gear[2];
+    defense.mr.value = Math.floor((attributs.arc.value-50)/5) + progression.defense.mr_investment.value + defense.mr.bonus + gear[2];
     */
     
   }
   _computeMechanicsRessources(systemData){
+    const attributs = systemData.attributs;
     const mechanics = systemData.mechanics;
     const progression = systemData.progression;
     
@@ -162,9 +169,10 @@ export class ParalleaActor extends Actor {
     var gear = this._computeGearRessource(systemData);
     
     ress.hp.value = ress.hp.base + progression.ressources.hp_up.value + progression.ressources.hp_up.special + gear[0]; 
-    ress.mana.value = ress.mana.base + progression.ressources.mana_up.value + progression.ressources.mana_up.special + gear[1];
+    ress.mana.value = ress.mana.base + Math.max(Math.floor((attributs.arc.value-60)/10),0) + progression.ressources.mana_up.value + progression.ressources.mana_up.special + gear[1];
     ress.ressource.value = ress.ressource.base + progression.ressources.ressource_up.value + progression.ressources.ressource_up.special;
-    
+    ress.tena.value = ress.tena.base + Math.max(Math.floor((attributs.str.value-60)/10),0);
+    if (ress.tena.value>0) ress.tena.display = true;
   }
   _computeMechanicsAttack(systemData){
     const attributs = systemData.attributs;
@@ -177,9 +185,9 @@ export class ParalleaActor extends Actor {
     
     const atk = mechanics.attack;
     
-    atk.phy.base =  Math.max(Math.floor((attributs.str.value-50)/10),Math.floor((attributs.dex.value-50)/10));
+    atk.phy.base =  Math.floor((attributs.dex.value-50)/10);
     atk.ran.base =  Math.floor((attributs.dex.value-50)/10);
-    atk.mag.base =  Math.floor((attributs.int.value-50)/10);
+    atk.mag.base =  Math.floor((attributs.wis.value-50)/10);
     
     atk.phy.value = atk.phy.base + atk.phy.bonus + atk.phy.armor + progression.attack.physic_investment.value + gear[0];
     atk.ran.value = atk.ran.base + atk.ran.bonus + atk.ran.armor + progression.attack.range_investment.value + gear[1];
@@ -199,11 +207,11 @@ export class ParalleaActor extends Actor {
     var gear = this._computeGearDamage(systemData);
     
     dmg.phy.base =  Math.max(Math.floor((attributs.str.value-50)/10),0);
-    dmg.ran.base =  Math.max(Math.floor((attributs.dex.value-50)/10),0);
-    dmg.mag.base =  Math.max(Math.floor((attributs.int.value-50)/10),0);
+    //dmg.ran.base =  Math.max(Math.floor((attributs.dex.value-50)/10),0);
+    dmg.mag.base =  Math.max(Math.floor((attributs.arc.value-50)/10),0);
     
     dmg.phy.value = dmg.phy.base + dmg.phy.bonus + progression.attack.physic_investment.value + gear[0];
-    dmg.ran.value = dmg.ran.base + dmg.ran.bonus + progression.attack.range_investment.value + gear[1];
+    dmg.ran.value = dmg.ran.bonus + progression.attack.range_investment.value + gear[1];
     dmg.mag.value = dmg.mag.base + dmg.mag.bonus + progression.attack.magic_investment.value + gear[2];
   }
   
@@ -306,4 +314,50 @@ export class ParalleaActor extends Actor {
     return roll;
   }
   
+  _noStance(){
+    let stance = {
+      defense:{
+        def:{
+          value:0
+        },
+        arm:{
+          value:0,
+        },
+        mr:{
+          value:0,
+        }
+      },
+      
+      attack:{
+        global:{
+          value:0,
+        },
+        phy:{
+          value:0,
+        },
+        ran:{
+          value:0,
+        },
+        mag:{
+          value:0,
+        }
+      },
+      
+      damage:{
+        global:{
+          value:0,
+        },
+        phy:{
+          value:0,
+        },
+        ran:{
+          value:0,
+        },
+        mag:{
+          value:0,
+        }
+      }
+    }
+    return stance;
+  }
 }

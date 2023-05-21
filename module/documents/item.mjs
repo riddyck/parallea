@@ -108,6 +108,7 @@ export class ParalleaItem extends Item {
   
   /*Crée la formule de lancé de dé en utilisant les données de l'objet.*/
   _computeRollItem(rollCategory){
+    
     if(rollCategory == "attack"){
       switch(this.type){
         case 'weapon':
@@ -120,7 +121,6 @@ export class ParalleaItem extends Item {
         break;
         case 'assault':
         this._computeAssaultData();
-        console.log("AAAAAAAAAAAAAAAAAAh",this.system);
         this.formula="d20+"+this.system.itemAttack.toString()+"+"+this.system.attack_bonus.value.toString();
         break;
         default:
@@ -169,11 +169,21 @@ export class ParalleaItem extends Item {
   
   _computeWeaponData(){
     const actorData = this.parent.system;
+
+    let stance = this._noStance();
+    console.log("Stance",stance);
+    console.log("SelectedStance",actorData.selectedStance);
+    if (actorData.selectedStance!='0'){ 
+      stance = this.parent.collections.items.get(actorData.selectedStance).system;
+    }
+
     const data = this.system;
     const rune = data.runes.stats;
 
-    data.attack.value = data.attack.base + actorData.mechanics.attack[data.attributs.type].value;
-    data.damage.value = actorData.mechanics.damage[data.attributs.type].value;
+
+    console.log("AAAAAAAAAAAAAAAAAAAAh",stance);
+    data.attack.value = data.attack.base + actorData.mechanics.attack[data.attributs.type].value + stance.attack[data.attributs.type].value + stance.attack.global.value;
+    data.damage.value = actorData.mechanics.damage[data.attributs.type].value + stance.damage[data.attributs.type].value + stance.damage.global.value;
 
     data.attack.value += rune.attack.global;
     data.damage.value += rune.damage.global;
@@ -188,14 +198,26 @@ export class ParalleaItem extends Item {
   
   _computeSpellData(){
     const actorData = this.parent.system;
+
+    let stance = this._noStance();
+    if (this.system.selectedStance!='0'){ 
+      stance = this.parent.collections.items.get(actorData.selectedStance).system;
+    }
+
     const data = this.system;
     
-    data.attack.value = data.attack.base + actorData.mechanics.attack[data.attributs.type].value;
-    data.damage.value = actorData.mechanics.damage[data.attributs.type].value;
+    data.attack.value = data.attack.base + actorData.mechanics.attack[data.attributs.type].value + stance.attack[data.attributs.type].value + stance.attack.global.value;
+    data.damage.value = actorData.mechanics.damage[data.attributs.type].value + stance.damage[data.attributs.type].value + stance.damage.global.value;
 }
   
   _computeAssaultData(){
     const actorData = this.parent.system;
+
+    let stance = this._noStance();
+    if (this.system.selectedStance!='0'){ 
+      stance = this.parent.collections.items.get(actorData.selectedStance).system;
+    }
+
     const assaultData = this.system;
     var itemData = null;
     
@@ -244,13 +266,11 @@ export class ParalleaItem extends Item {
       }
       
     }
-    console.log("Test",this.system);
+
+    assaultData.attack += stance.attack[itemData.attributs.type].value + stance.attack.global.value
+    assaultData.damage += stance.damage[itemData.attributs.type].value + stance.damage.global.value
+  }
     
-  }
-  
-  _computeFormula(){
-  }
-  
   _computeRuneType(stats,rune){
     switch (rune.type){
       case 'edge':
@@ -295,5 +315,52 @@ export class ParalleaItem extends Item {
       default:
         break;
     }
+  }
+  
+  _noStance(){
+    let stance = {
+      defense:{
+        def:{
+          value:0
+        },
+        arm:{
+          value:0,
+        },
+        mr:{
+          value:0,
+        }
+      },
+      
+      attack:{
+        global:{
+          value:0,
+        },
+        phy:{
+          value:0,
+        },
+        ran:{
+          value:0,
+        },
+        mag:{
+          value:0,
+        }
+      },
+      
+      damage:{
+        global:{
+          value:0,
+        },
+        phy:{
+          value:0,
+        },
+        ran:{
+          value:0,
+        },
+        mag:{
+          value:0,
+        }
+      }
+    }
+    return stance;
   }
 }

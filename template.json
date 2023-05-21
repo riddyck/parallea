@@ -21,17 +21,17 @@
           "value": 45,
           "label": "Dextérité"
         },
-        "int": {
+        "arc": {
           "value": 45,
-          "label": "Intelligence"
+          "label": "Arcane"
         },
         "wis": {
           "value": 45,
           "label": "Sagesse"
         },
-        "stl": {
+        "per": {
           "value": 45,
-          "label": "Discrétion"
+          "label": "Perception"
         },
         "cha": {
           "value": 45,
@@ -52,6 +52,12 @@
             "current":0,
             "label": "Mana",
             "display": true
+          },
+          "tena": {
+            "base":0,
+            "current":0,
+            "label": "Ténacité",
+            "display": false
           },
           "ressource": {
             "base":0,
