@@ -171,8 +171,6 @@ export class ParalleaItem extends Item {
     const actorData = this.parent.system;
 
     let stance = this._noStance();
-    console.log("Stance",stance);
-    console.log("SelectedStance",actorData.selectedStance);
     if (actorData.selectedStance!='0'){ 
       stance = this.parent.collections.items.get(actorData.selectedStance).system;
     }
@@ -200,7 +198,7 @@ export class ParalleaItem extends Item {
     const actorData = this.parent.system;
 
     let stance = this._noStance();
-    if (this.system.selectedStance!='0'){ 
+    if (actorData.selectedStance!='0'){ 
       stance = this.parent.collections.items.get(actorData.selectedStance).system;
     }
 
@@ -214,7 +212,7 @@ export class ParalleaItem extends Item {
     const actorData = this.parent.system;
 
     let stance = this._noStance();
-    if (this.system.selectedStance!='0'){ 
+    if (actorData.selectedStance!='0'){ 
       stance = this.parent.collections.items.get(actorData.selectedStance).system;
     }
 
