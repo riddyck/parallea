@@ -214,9 +214,10 @@ export class ParalleaItem extends Item {
     const rune = data.runes.stats;
    
     {
+      if(data.damage.base!=0)damage_formula+="+"+data.damage.base.toString();
       damage_formula+="+"+actorData.mechanics.damage[data.attributs.type].value.toString();
       damage_formula+="+"+(stance.damage[data.attributs.type].value+stance.damage.global.value).toString();
-      if(rune.attack.global!=0)damage_formula+="+"+rune.damage.global.toString();
+      if(rune.damage.global!=0)damage_formula+="+"+rune.damage.global.toString();
     }
     
     
