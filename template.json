@@ -10,7 +10,8 @@
         "name":"",
         "age":20,
         "race":"Humain",
-        "occupation":""
+        "occupation":"",
+        "biography":""
       },
       "attributs":{
         "str": {

@@ -34,7 +34,16 @@
                     <p>Armes équipées:</p>
                     {{#each arsenal as |item key|}}
                     {{#if item.value}}
-                    <p>{{item.object.name}}</p>
+
+
+                    <li class="item flexrow" data-item-id="{{item.object._id}}">
+                        <div class="item-name">
+                          <h4>{{item.object.name}}</h4>
+                        </div>
+                        <div class="item-announce item-prop"><a class="rollable" data-roll-type="item" data-roll-category="attack">Attaque</a></div>
+                        <div class="item-announce item-prop"><a class="rollable" data-roll-type="item" data-roll-category="damage">Dégats</a></div>
+                      </li>
+
                     {{/if}}
                     {{/each}}
                 </div>

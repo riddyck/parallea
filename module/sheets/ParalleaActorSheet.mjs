@@ -165,7 +165,11 @@ export class ParalleaActorSheet extends ActorSheet{
         // Handle item rolls.
         if (dataset.rollType) {
             if (dataset.rollType == 'item') {
+                console.log("element:",element);
+                console.log("dataset:",dataset);
+                console.log("closest:",element.closest('.item'));
                 const itemId = element.closest('.item').dataset.itemId;
+                console.log("itemId:",itemId);
                 const item = this.actor.items.get(itemId);
                 if (item) return item.roll(dataset.rollCategory);
             }
@@ -194,7 +198,7 @@ export class ParalleaActorSheet extends ActorSheet{
             case 'weapon':
             return CONFIG.PARALLEA.images.sword;
             case 'armor':
-            return CONFIG.PARALLEA.images.shield;
+            return CONFIG.PARALLEA.images.chestplate;
             case 'spell':
             return CONFIG.PARALLEA.images.lightning;
             case 'skill':

@@ -1,3 +1,10 @@
+<div class="flexcol">
+    <div class="flexrow flex-group-center">
+        <label for="system.runes.runes_number" class="flexrow">Nombre de runes: </label>
+        <input name = "system.runes.runes_number" type="text" value="{{system.runes.runes_number}}" data-dtype="Number" />
+    </div>
+</div>
+<br>
 <ol class="items-list">
     {{#each system.runes.runes as |rune id|}}
     <li class="item flexrow" data-item-id="{{item._id}}">
