@@ -19,7 +19,7 @@ export class ParalleaItem extends Item {
     //If the item is a weapon or an armor (ie runable) then loop into the runes, and make them visible depending on the number of runes on an item
     this.system.runable = this.type == "weapon" || this.type == "armor";
     if(this.system.runable){
-
+      
       this.system.runes.stats = {
         "attack":{
           "phy":0,
@@ -43,7 +43,7 @@ export class ParalleaItem extends Item {
           "mana":0
         }
       }
-
+      
       var limit = this.system.runes.runes_number;
       for(var k = 1; k <=Math.min(limit,3); k++){
         this.system.runes.runes[k].display = true;
@@ -116,12 +116,12 @@ export class ParalleaItem extends Item {
         this.formula="d20+"+this.system.attack_formula;
         break;
         case 'spell':
-        this._computeSpellData();
-        this.formula="d20+"+this.system.attack.value.toString();
+        this._computeSpellAttack();
+        this.formula="d20+"+this.system.attack_formula;
         break;
         case 'assault':
         this._computeAssaultData();
-        this.formula="d20+"+this.system.itemAttack.toString()+"+"+this.system.attack_bonus.value.toString();
+        this.formula="d20+"+this.system.attack_formula;
         break;
         default:
         this.formula="d1";
@@ -137,31 +137,23 @@ export class ParalleaItem extends Item {
     else if (rollCategory == "damage"){
       switch(this.type){
         case 'weapon':
-          this._computeWeaponDamage();
-          this.formula=this.system.damage_formula;
-          break;
+        this._computeWeaponDamage();
+        this.formula=this.system.damage_formula;
+        break;
         case 'spell':
-          this._computeSpellData();
-          this.formula=this.system.damage.dice_number.toString()+"d"+this.system.damage.dice_damage.toString();
-          this.formula+="+"+this.system.damage.bonus_multiplier.toString()+"*"+this.system.damage.value.toString();
-          break;
+        this._computeSpellDamage();
+        this.formula=this.system.damage_formula;
+        break;
         case 'assault':
-          this._computeAssaultData();
-
-          console.log("ICI",this.system.damage);
+        this._computeAssaultData();
+        
+        console.log("ICI",this.system.damage);
         
         
-          this.formula=this.system.damage.weapon_dice_number.toString()+"d"+this.system.damage.weapon_dice_damage.toString();
-          this.formula+="+"+this.system.itemDamage.toString();
-        
-          this.formula+="+"+this.system.damage_roll_bonus.dice_number.toString()+"d"+this.system.damage_roll_bonus.dice_damage.toString();
-          this.formula+="+"+this.system.damage_bonus.bonus_multiplier*this.system.damage_bonus.bonus.toString();
-          this.formula+="+"+this.system.damage.damage_value.toString();
-
-          if(this.system.damage_bonus.global_multiplier!=1) this.formula=this.system.damage_bonus.global_multiplier.toString()+"*("+this.formula.toString()+")";
-          break;
+        this.formula=this.system.damage_formula;
+        break;
         default:
-            this.formula="d1";
+        this.formula="d1";
         break;
       }
     }
@@ -171,82 +163,109 @@ export class ParalleaItem extends Item {
   
   _computeWeaponAttack(){
     const actorData = this.parent.system;
-
+    
     let stance = this._noStance();
     if (actorData.selectedStance!='0'){ 
       stance = this.parent.collections.items.get(actorData.selectedStance).system;
     }
-
+    
     const data = this.system;
     const rune = data.runes.stats;
-
+    
     let ambidextry = 0;
     if (actorData.twoWeapons==true && data.attributs.hands == 1){
       ambidextry-=6;
       if(data.attributs.mainHand == true) ambidextry+=2;
       if(data.special.ambidextry.value == true) ambidextry+=2;
     }
-
+    
     let attack_formula = "";
     {
-    attack_formula+=data.attack.base.toString();
-    attack_formula+="+"+actorData.mechanics.attack[data.attributs.type].value.toString();
-    attack_formula+="+"+(stance.attack[data.attributs.type].value+stance.attack.global.value).toString();
-    if(rune.attack.global!=0)attack_formula+="+"+rune.attack.global.toString();
-    if(ambidextry!=0) attack_formula+="+"+ambidextry.toString();
+      attack_formula+=data.attack.base.toString();
+      attack_formula+="+"+actorData.mechanics.attack[data.attributs.type].value.toString();
+      attack_formula+="+"+(stance.attack[data.attributs.type].value+stance.attack.global.value).toString();
+      if(rune.attack.global!=0)attack_formula+="+"+rune.attack.global.toString();
+      if(ambidextry!=0) attack_formula+="+"+ambidextry.toString();
     }
-    console.log("Formule d'attaque:",attack_formula);
     data.attack_formula = attack_formula;
   }
-
+  
   _computeWeaponDamage(){
     const actorData = this.parent.system;
-
+    
     let stance = this._noStance();
     if (actorData.selectedStance!='0'){ 
       stance = this.parent.collections.items.get(actorData.selectedStance).system;
     }
-
+    
     
     let damage_formula = this.system.damage.dice_number.toString()+"d"+this.system.damage.dice_damage.toString();
-
+    
     const data = this.system;
     const rune = data.runes.stats;
-   
+    
     {
       if(data.damage.base!=0)damage_formula+="+"+data.damage.base.toString();
       damage_formula+="+"+actorData.mechanics.damage[data.attributs.type].value.toString();
       damage_formula+="+"+(stance.damage[data.attributs.type].value+stance.damage.global.value).toString();
       if(rune.damage.global!=0)damage_formula+="+"+rune.damage.global.toString();
     }
-    
-    
     data.damage_formula = damage_formula;
-
   }
   
-  _computeSpellData(){
+  
+  _computeSpellAttack(){
     const actorData = this.parent.system;
-
+    
     let stance = this._noStance();
     if (actorData.selectedStance!='0'){ 
       stance = this.parent.collections.items.get(actorData.selectedStance).system;
     }
-
+    
     const data = this.system;
     
-    data.attack.value = data.attack.base + actorData.mechanics.attack[data.attributs.type].value + stance.attack[data.attributs.type].value + stance.attack.global.value;
-    data.damage.value = actorData.mechanics.damage[data.attributs.type].value + stance.damage[data.attributs.type].value + stance.damage.global.value;
-}
+    data.attack.value = stance.attack[data.attributs.type].value + stance.attack.global.value;
+    
+    let attack_formula = "";
+    {
+      attack_formula+=data.attack.base.toString();
+      attack_formula+="+"+actorData.mechanics.attack[data.attributs.type].value.toString();
+      attack_formula+="+"+(stance.attack[data.attributs.type].value + stance.attack.global.value).toString();
+    }
+    data.attack_formula = attack_formula;
+    
+  }
+  
+  
+  
+  _computeSpellDamage(){
+    const actorData = this.parent.system;
+    
+    let stance = this._noStance();
+    if (actorData.selectedStance!='0'){ 
+      stance = this.parent.collections.items.get(actorData.selectedStance).system;
+    }
+    
+    let damage_formula = this.system.damage.dice_number.toString()+"d"+this.system.damage.dice_damage.toString();
+    damage_formula+="+"+this.system.damage.bonus_multiplier.toString()+"*";
+    
+    const data = this.system; 
+    {
+      damage_formula+=actorData.mechanics.damage[data.attributs.type].value.toString();
+      damage_formula+="+"+(stance.damage[data.attributs.type].value+stance.damage.global.value).toString();
+    }
+    data.damage_formula = damage_formula;
+    
+  }
   
   _computeAssaultData(){
     const actorData = this.parent.system;
-
+    
     let stance = this._noStance();
     if (actorData.selectedStance!='0'){ 
       stance = this.parent.collections.items.get(actorData.selectedStance).system;
     }
-
+    
     const assaultData = this.system;
     var itemData = null;
     
@@ -265,8 +284,10 @@ export class ParalleaItem extends Item {
       }
     }
     
+    let attack_formula = "";
+    let damage_formula ="";
+    
     if (itemData==null){
-      assaultData.attack={};
       assaultData.damage={
         weapon_dice_number:0,
         weapon_dice_damage:0
@@ -275,80 +296,115 @@ export class ParalleaItem extends Item {
       assaultData.damage.weapon_dice_damage=0;
       assaultData.itemAttack = 0;
       assaultData.itemDamage = 0;
+      
+      attack_formula ="0";
+      damage_formula ="d0";
     }
-    
-    
     else {
-      assaultData.attack={};
+      const rune = itemData.runes.stats;
+      
       assaultData.damage={
         weapon_dice_number:itemData.damage.dice_number,
         weapon_dice_damage:itemData.damage.dice_damage,
         damage_value:0
       };
-
-      console.log("Ici assault data",assaultData);
-      console.log("ICI2",this.system.damage.weapon_dice_damage);
-
+      
       assaultData.itemAttack = itemData.attack.base + actorData.mechanics.attack[itemData.attributs.type].value;
       assaultData.itemDamage = itemData.damage.base + actorData.mechanics.damage[itemData.attributs.type].value;
       assaultData.damage.damage_value = actorData.mechanics.damage[itemData.attributs.type].value;
-
+      
+      let ambidextry = 0;
       if (actorData.twoWeapons==true && itemData.attributs.hands == 1){
-        assaultData.attack_bonus.value-=6;
-        if(itemData.attributs.mainHand == true) assaultData.attack_bonus.value+=2;
-        if(itemData.special.ambidextry.value == true) assaultData.attack_bonus.value+=2;
+        ambidextry-=6;
+        if(itemData.attributs.mainHand == true) ambidextry+=2;
+        if(itemData.special.ambidextry.value == true) ambidextry+=2;
       }
       
+      assaultData.attack_bonus.value+=ambidextry;
+      
+      
+      assaultData.attack_bonus.value += stance.attack[itemData.attributs.type].value + stance.attack.global.value
+      assaultData.damage.damage_value += stance.damage[itemData.attributs.type].value + stance.damage.global.value
+      
+      
+      
+      attack_formula +=itemData.attack.base.toString();
+      attack_formula +="+"+actorData.mechanics.attack[itemData.attributs.type].value.toString();
+      attack_formula +="+"+(stance.attack[itemData.attributs.type].value + stance.attack.global.value).toString();
+      if(ambidextry!=0)attack_formula +="+"+ambidextry.toString();
+      if(rune.attack.global!=0)attack_formula+="+"+rune.attack.global.toString();
+      
+      
+      
+      
+      
+      
+      assaultData.attack_formula=attack_formula;
+      
+      if (assaultData.global_multiplier!=1)damage_formula+="*(";
+      
+      damage_formula += itemData.damage.dice_number.toString()+"d"+itemData.damage.dice_damage.toString();
+      damage_formula += "+"+itemData.damage.base.toString();
+      damage_formula += "+"+actorData.mechanics.damage[itemData.attributs.type].value.toString();
+      if(rune.damage.global!=0)damage_formula+="+"+rune.damage.global.toString();
+      
+      damage_formula+="+"+assaultData.damage_roll_bonus.dice_number.toString()+"d"+assaultData.damage_roll_bonus.dice_damage.toString();
+      damage_formula+="+"+assaultData.damage_bonus.bonus_multiplier*assaultData.damage_bonus.bonus.toString();
+      damage_formula+="+"+actorData.mechanics.damage[itemData.attributs.type].value.toString();
+      damage_formula+="+"+(stance.damage[itemData.attributs.type].value + stance.damage.global.value).toString();
+      
+      
+      if (assaultData.global_multiplier!=1)damage_formula+=")";
+      
+      assaultData.damage_formula=damage_formula;
+      
     }
-
-    assaultData.attack_bonus.value += stance.attack[itemData.attributs.type].value + stance.attack.global.value
-    assaultData.damage.damage_value += stance.damage[itemData.attributs.type].value + stance.damage.global.value
     
   }
-    
+  
   _computeRuneType(stats,rune){
     switch (rune.type){
       case 'edge':
-        runesFunction.edgePrep(stats,rune);
-        break;
+      runesFunction.edgePrep(stats,rune);
+      break;
       case 'power':
-        runesFunction.powerPrep(stats,rune);
-        break;
+      runesFunction.powerPrep(stats,rune);
+      break;
       case 'hardness':
-        runesFunction.hardnessPrep(stats,rune);
-        break;
+      runesFunction.hardnessPrep(stats,rune);
+      break;
       case 'fire':
-        runesFunction.firePrep(stats,rune);
-        break;
-
+      runesFunction.firePrep(stats,rune);
+      break;
+      
       case 'resistance':
-        runesFunction.resistancePrep(stats,rune);
-        break;
+      runesFunction.resistancePrep(stats,rune);
+      break;
       case 'protection':
-        runesFunction.protectionPrep(stats,rune);
-        break;
+      runesFunction.protectionPrep(stats,rune);
+      break;
       case 'reinforce':
-        runesFunction.reinforcePrep(stats,rune);
-        break;
-
+      runesFunction.reinforcePrep(stats,rune);
+      break;
+      
       case 'mana':
-        runesFunction.manaPrep(stats,rune);
-        break;
+      runesFunction.manaPrep(stats,rune);
+      break;
       case 'magicPower':
-        runesFunction.magicPowerPrep(stats,rune);
-        break;
+      runesFunction.magicPowerPrep(stats,rune);
+      break;
       case 'magicFocus':
-        runesFunction.magicFocusPrep(stats,rune);
-        break;
+      runesFunction.magicFocusPrep(stats,rune);
+      break;
       case 'magicOvercharge':
-        runesFunction.magicOverchagePrep(stats,rune);
-        break;
-
+      runesFunction.magicOverchagePrep(stats,rune);
+      break;
+      
       case 'light':
-        runesFunction.lightPrep(stats,rune);
-        break;
+      runesFunction.lightPrep(stats,rune);
+      break;
       default:
-        break;
+      break;
     }
   }
   
