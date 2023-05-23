@@ -644,7 +644,7 @@
         },
         "arc": {
           "value": 0,
-          "label": "Intelligence"
+          "label": "Arcane"
         },
         "wis": {
           "value": 0,
@@ -652,7 +652,7 @@
         },
         "per": {
           "value": 0,
-          "label": "Discrétion"
+          "label": "Perception"
         },
         "cha": {
           "value": 0,
