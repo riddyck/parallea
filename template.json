@@ -642,7 +642,7 @@
           "value": 0,
           "label": "Dextérité"
         },
-        "int": {
+        "arc": {
           "value": 0,
           "label": "Intelligence"
         },
@@ -650,7 +650,7 @@
           "value": 0,
           "label": "Sagesse"
         },
-        "stl": {
+        "per": {
           "value": 0,
           "label": "Discrétion"
         },
