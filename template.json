@@ -117,61 +117,6 @@
             "bonus":0,
             "label": "Dommages magiques"
           }
-        },
-        "posture":{
-          "none": {
-            "label" : "Sans posture",
-            "available" : true
-          },
-          
-          "focus" : {
-            "label" : "Focus",
-            "available" : true
-          },
-          "offens" : {
-            "label" : "Offensif",
-            "available" : true
-          },
-          "defence" : {
-            "label" : "Defensif",
-            "available" : true
-          },
-
-          "savage" : {
-            "label" : "Sauvage",
-            "available" : false
-          },
-
-          "fanatic" : {
-            "label" : "Fanatic",
-            "available" : false
-          },
-
-          "bear" : {
-            "label" : "Ours",
-            "available" : false
-          },
-          "crow" : {
-            "label" : "Corbeau",
-            "available" : false
-          },
-          "sylv" : {
-            "label" : "Sylvestre",
-            "available" : false
-          },
-          
-          "astel1" : {
-            "label" : "Ours",
-            "available" : false
-          },
-          "astel2" : {
-            "label" : "Corbeau",
-            "available" : false
-          },
-          "astel3" : {
-            "label" : "Sylvestre",
-            "available" : false
-          }
         }
       },
       
@@ -514,7 +459,6 @@
         }
       }
     },
-
     "assault":{
       "attack_bonus":{
         "bonus":0,
@@ -569,7 +513,6 @@
         }
       }
     },
-    
     "stance":{
       "attributs":{
         "label": "Sans posture",
@@ -657,6 +600,82 @@
         "cha": {
           "value": 0,
           "label": "Charisme"
+        }
+      }
+    },
+    "skill":{
+      "attributs":{
+        "boost": {
+          "value": 45,
+          "charac": "str",
+          "display": true
+        },
+        "level":1
+      },
+      
+      "mechanics":{
+        "ressources":{
+          "hp": {
+            "value":0,
+            "label": "PV"
+          },
+          "mana": {
+            "value":0,
+            "label": "Mana"
+          },
+          "tena": {
+            "value":0,
+            "label": "Ténacité"
+          },
+          "ressource": {
+            "value":0,
+            "label": "Ressource secondaire"
+          }
+        },
+        
+        "defense":{
+          "def":{
+            "value":0,
+            "label": "Défense"
+          },
+          "arm":{
+            "value":0,
+            "label": "Armure"
+          },
+          "mr":{
+            "value":0,  
+            "label": "RM"
+          }
+        },
+        
+        "attack":{
+          "phy":{
+            "value":0,
+            "label": "Attaque physique"
+          },
+          "ran":{
+            "value":0,
+            "label": "Attaque à distance"
+          },
+          "mag":{
+            "value":0,
+            "label": "Attaque magique"
+          }
+        },
+        
+        "damage":{
+          "phy":{
+            "value":0,
+            "label": "Dommages physiques"
+          },
+          "ran":{
+            "value":0,
+            "label": "Dommages à distance"
+          },
+          "mag":{
+            "value":0,
+            "label": "Dommages magiques"
+          }
         }
       }
     }

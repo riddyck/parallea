@@ -1,0 +1,67 @@
+<div class="flexcol">
+    <span>Bonus pour un genre d'action: <input name="system.attributs.boost.display" type="checkbox" {{checked system.attributs.boost.display}}/></span>
+    {{#if system.attributs.boost.display}}
+    <div class="flexrow flex-group-center">
+        <select name="system.attributs.boost.charac" >
+            {{#select system.attributs.boost.charac}}
+            {{#each config.attributs as |name type|}}
+            <option value="{{type}}">{{name}}</option>
+            {{/each}}
+            {{/select}}
+        </select>
+        <input name = "system.attributs.boost.value" type="text" value="{{system.attributs.boost.value}}" data-dtype="Number"/>
+    </div>
+    {{/if}}
+
+    <br><br>
+
+    <div class="flexcol flex-group-center">
+        {{#each system.mechanics.ressources as |ressource key|}}
+        
+            <div class="flexrow flex-group-center">
+                <label for="system.mechanics.ressources.{{key}}.value" class="flexrow">{{ressource.label}}: </label>
+                <input name = "system.mechanics.ressources.{{key}}.value" type="text" value="{{ressource.value}}" data-dtype="Number"/>
+            </div>
+        
+        {{/each}}
+    </div>
+
+    <br><br>
+
+    <div class="flexcol flex-group-center">
+        {{#each system.mechanics.defense as |ressource key|}}
+        
+            <div class="flexrow flex-group-center">
+                <label for="system.mechanics.defense.{{key}}.value" class="flexrow">{{ressource.label}}: </label>
+                <input name = "system.mechanics.defense.{{key}}.value" type="text" value="{{ressource.value}}" data-dtype="Number"/>
+            </div>
+        
+        {{/each}}
+    </div>
+
+    <br><br>
+
+    <div class="flexcol flex-group-center">
+        {{#each system.mechanics.attack as |ressource key|}}
+        
+            <div class="flexrow flex-group-center">
+                <label for="system.mechanics.attack.{{key}}.value" class="flexrow">{{ressource.label}}: </label>
+                <input name = "system.mechanics.attack.{{key}}.value" type="text" value="{{ressource.value}}" data-dtype="Number"/>
+            </div>
+        
+        {{/each}}
+    </div>
+
+    <br><br>
+
+    <div class="flexcol flex-group-center">
+        {{#each system.mechanics.damage as |ressource key|}}
+        
+            <div class="flexrow flex-group-center">
+                <label for="system.mechanics.damage.{{key}}.value" class="flexrow">{{ressource.label}}: </label>
+                <input name = "system.mechanics.damage.{{key}}.value" type="text" value="{{ressource.value}}" data-dtype="Number"/>
+            </div>
+        
+        {{/each}}
+    </div>
+</div>

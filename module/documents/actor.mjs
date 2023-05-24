@@ -171,8 +171,8 @@ export class ParalleaActor extends Actor {
     ress.hp.value = ress.hp.base + progression.ressources.hp_up.value + progression.ressources.hp_up.special + gear[0]; 
     ress.mana.value = ress.mana.base + Math.max(Math.floor((attributs.arc.value-60)/10),0) + progression.ressources.mana_up.value + progression.ressources.mana_up.special + gear[1];
     ress.ressource.value = ress.ressource.base + progression.ressources.ressource_up.value + progression.ressources.ressource_up.special;
-    ress.tena.value = ress.tena.base + Math.max(Math.floor((attributs.str.value-60)/10),0);
-    if (ress.tena.value>0) ress.tena.display = true;
+    ress.tena.value = ress.tena.base + Math.max(Math.floor((attributs.str.value-60)/10),0) + gear[2];
+    (ress.tena.value>0) ? ress.tena.display = true : ress.tena.display = false;
   }
   _computeMechanicsAttack(systemData){
     const attributs = systemData.attributs;
@@ -220,6 +220,16 @@ export class ParalleaActor extends Actor {
     var gear_ran = 0;
     var gear_mag = 0;
     
+    let source = this.collections.items._source;
+    
+    for (let key of Object.keys(this.collections.items._source)) {
+      if(source[key].type=="skill"){
+        gear_phy += source[key].system.mechanics.attack.phy.value;
+        gear_ran += source[key].system.mechanics.attack.ran.value;
+        gear_mag += source[key].system.mechanics.attack.mag.value;
+      }
+    }
+    
     for (let key of Object.keys(systemData.equipment)) {
       if (systemData.equipment[key]){
         const item = this.items.get(key);
@@ -245,6 +255,17 @@ export class ParalleaActor extends Actor {
     var gear_ran = 0;
     var gear_mag = 0;
     
+
+    let source = this.collections.items._source;
+    
+    for (let key of Object.keys(this.collections.items._source)) {
+      if(source[key].type=="skill"){
+        gear_phy += source[key].system.mechanics.damage.phy.value;
+        gear_ran += source[key].system.mechanics.damage.ran.value;
+        gear_mag += source[key].system.mechanics.damage.mag.value;
+      }
+    }
+
     for (let key of Object.keys(systemData.equipment)) {
       if (systemData.equipment[key]){
         const item = this.items.get(key);
@@ -263,6 +284,16 @@ export class ParalleaActor extends Actor {
     var gear_arm = 0;
     var gear_mr = 0;
     
+    let source = this.collections.items._source;
+    
+    for (let key of Object.keys(this.collections.items._source)) {
+      if(source[key].type=="skill"){
+        gear_def += source[key].system.mechanics.defense.def.value;
+        gear_arm += source[key].system.mechanics.defense.arm.value;
+        gear_mr += source[key].system.mechanics.defense.mr.value;
+      }
+    }
+
     for (let key of Object.keys(systemData.equipment)) {
       if (systemData.equipment[key]){
         gear_def+=this.items.get(key).system.defense.base;
@@ -272,12 +303,25 @@ export class ParalleaActor extends Actor {
         }
       }
     }
+    console.log([gear_def,gear_arm,gear_mr]);
     return([gear_def,gear_arm,gear_mr]);
   }
   
   _computeGearRessource(systemData){
     var gear_hp = 0;
     var gear_mana = 0;
+    var gear_tena = 0;
+
+    
+    let source = this.collections.items._source;
+    
+    for (let key of Object.keys(this.collections.items._source)) {
+      if(source[key].type=="skill"){
+        gear_hp += source[key].system.mechanics.ressources.hp.value;
+        gear_mana += source[key].system.mechanics.ressources.mana.value;
+        gear_tena += source[key].system.mechanics.ressources.tena.value;
+      }
+    }
     
     for (let key of Object.keys(systemData.equipment)) {
       if (systemData.equipment[key]){
@@ -289,7 +333,7 @@ export class ParalleaActor extends Actor {
         }
       }
     }
-    return([gear_hp,gear_mana]);
+    return([gear_hp,gear_mana,gear_tena]);
   }
 
   _computeStanceAttribut(rollAtt){

@@ -19,7 +19,10 @@ export const preloadHandlebarsTemplates = async function() {
 		"systems/parallea/templates/navTabs/item/armorRunes.html",
 
 		"systems/parallea/templates/navTabs/item/spellFeatures.html",
-		"systems/parallea/templates/navTabs/item/spellSettings.html"
+		"systems/parallea/templates/navTabs/item/spellSettings.html",
+
+		"systems/parallea/templates/navTabs/item/skillFeatures.html",
+		"systems/parallea/templates/navTabs/item/skillSettings.html"
     ];
 
 	console.log(`Load templates`);
