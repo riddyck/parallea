@@ -1,0 +1,30 @@
+<table>
+    <tr>
+        <th>Multiplicateur de scaling</th>
+        <th>Multiplicateur global</th>
+        <th>Dégats bonus fixes</th>
+    </tr>
+    
+    <tr>
+        <td>
+            <input name="system.damage_bonus.bonus_multiplier" type="text" value="{{system.damage_bonus.bonus_multiplier}}" data-dtype="Number" />
+        </td>
+        <td>
+            <input name="system.damage_bonus.global_multiplier" type="text" value="{{system.damage_bonus.global_multiplier}}" data-dtype="Number" />
+        </td>
+        <td>
+            <input name="system.damage_bonus.bonus" type="text" value="{{system.damage_bonus.global_multiplier}}" data-dtype="Number" />
+        </td>
+    </tr>
+</table>
+
+<br>
+<p>Effets:</p>
+{{#each system.special as |special key|}}
+<div class="flexcol">
+    <div class="flexrow flex-group-center">
+        <label for="system.special.{{key}}.value" class="flexrow">{{special.label}}: </label>
+        <input name = "system.special.{{key}}.value" type="checkbox" {{checked special.value}}/>
+    </div>
+</div>
+{{/each}}

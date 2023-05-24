@@ -340,8 +340,9 @@ export class ParalleaItem extends Item {
       
       
       assaultData.attack_formula=attack_formula;
+      console.log(assaultData);
       
-      if (assaultData.global_multiplier!=1)damage_formula+="*(";
+      if (assaultData.damage_bonus.global_multiplier!=1)damage_formula+=assaultData.damage_bonus.global_multiplier.toString()+"*(";
       
       damage_formula += itemData.damage.dice_number.toString()+"d"+itemData.damage.dice_damage.toString();
       damage_formula += "+"+itemData.damage.base.toString();
@@ -354,8 +355,8 @@ export class ParalleaItem extends Item {
       damage_formula+="+"+(stance.damage[itemData.attributs.type].value + stance.damage.global.value).toString();
       
       
-      if (assaultData.global_multiplier!=1)damage_formula+=")";
-      
+      if (assaultData.damage_bonus.global_multiplier!=1)damage_formula+=")";
+      console.log("Damage formula",damage_formula);
       assaultData.damage_formula=damage_formula;
       
     }
