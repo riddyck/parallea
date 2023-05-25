@@ -140,7 +140,6 @@ export class ParalleaActor extends Actor {
     
     
     let stance = this._noStance().defense;
-    console.log("HEIN ???",this.collections.items._source[0].system.attributs.boost.charac);
     if (this.system.selectedStance!='0' && this.system.selectedStance!='') stance = this.collections.items.get(this.system.selectedStance).system.defense;
     
     
@@ -304,7 +303,6 @@ export class ParalleaActor extends Actor {
         }
       }
     }
-    console.log([gear_def,gear_arm,gear_mr]);
     return([gear_def,gear_arm,gear_mr]);
   }
   
