@@ -91,12 +91,13 @@
         </div>
         <h4>{{item.name}}</h4>
       </div>
+      {{#if item.system.attributs.boost.display}}
       {{#each item.system.attributs.boost.charac as |charac id|}}
       {{#if charac.display}}
       <div class="item-announce item-prop"><a class="rollable" data-roll-type="item" data-roll-category="skillCharacBoost" data-att="{{id}}">{{charac.label}}</a></div>
       {{/if}}
       {{/each}}
-      
+      {{/if}}
       <div class="item-announce item-prop">
         <h4>{{item.system.attributs.level}}</h4>
       </div>
