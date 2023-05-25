@@ -107,8 +107,9 @@ export class ParalleaItem extends Item {
   }
   
   /*Crée la formule de lancé de dé en utilisant les données de l'objet.*/
-  _computeRollItem(rollCategory){
+  _computeRollItem(dataset){
     
+    var rollCategory = dataset.rollCategory;
     if(rollCategory == "attack"){
       switch(this.type){
         case 'weapon':
@@ -146,16 +147,17 @@ export class ParalleaItem extends Item {
         break;
         case 'assault':
         this._computeAssaultData();
-        
-        console.log("ICI",this.system.damage);
-        
-        
         this.formula=this.system.damage_formula;
         break;
         default:
         this.formula="d1";
         break;
       }
+    }
+    else if (rollCategory == "skillCharacBoost"){
+      let attributs = this.actor.system.attributs;
+      let boost = this.system.attributs.boost.value;
+      this.formula="d100<"+(attributs[dataset.att].value+boost).toString(); 
     }
   }
   

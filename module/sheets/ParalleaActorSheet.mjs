@@ -165,17 +165,11 @@ export class ParalleaActorSheet extends ActorSheet{
         // Handle item rolls.
         if (dataset.rollType) {
             if (dataset.rollType == 'item') {
-                console.log("element:",element);
-                console.log("dataset:",dataset);
-                console.log("closest:",element.closest('.item'));
                 const itemId = element.closest('.item').dataset.itemId;
-                console.log("itemId:",itemId);
                 const item = this.actor.items.get(itemId);
-                if (item) return item.roll(dataset.rollCategory);
+                if (item) return item.roll(dataset);
             }
             else if (dataset.rollType == 'attribut') {
-                console.log(dataset.rollAtt);
-                console.log("Object",this.object);
                 return this.object._rollAttribut(dataset.rollAtt);
             }
         }

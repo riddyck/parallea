@@ -140,7 +140,8 @@ export class ParalleaActor extends Actor {
     
     
     let stance = this._noStance().defense;
-    if (this.system.selectedStance!='0') stance = this.collections.items.get(this.system.selectedStance).system.defense;
+    console.log("HEIN ???",this.collections.items._source[0].system.attributs.boost.charac);
+    if (this.system.selectedStance!='0' && this.system.selectedStance!='') stance = this.collections.items.get(this.system.selectedStance).system.defense;
     
     
     

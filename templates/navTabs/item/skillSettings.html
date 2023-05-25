@@ -1,14 +1,25 @@
 <div class="flexcol">
     <span>Bonus pour un genre d'action: <input name="system.attributs.boost.display" type="checkbox" {{checked system.attributs.boost.display}}/></span>
     {{#if system.attributs.boost.display}}
-    <div class="flexrow flex-group-center">
-        <select name="system.attributs.boost.charac" >
-            {{#select system.attributs.boost.charac}}
-            {{#each config.attributs as |name type|}}
-            <option value="{{type}}">{{name}}</option>
+    <table>
+        <tr>
+            {{#each system.attributs.boost.charac as |attribut key|}}
+            <th><span class="ability-mod">{{attribut.label}}</span></th>
             {{/each}}
-            {{/select}}
-        </select>
+        </tr>
+        
+        <tr>
+            {{#each system.attributs.boost.charac as |attribut key|}}
+            <th class="flex-group-center">
+                <input name="system.attributs.boost.charac.{{key}}.display" type="checkbox" {{checked attribut.display}}/>
+            </th>
+            {{/each}}
+            
+        </tr>
+    </table>
+    
+    <div class="flexrow flex-group-center">
+        <label for="system.attributs.boost.value" class="flexrow">Bonus pour l'action: </label>
         <input name = "system.attributs.boost.value" type="text" value="{{system.attributs.boost.value}}" data-dtype="Number"/>
     </div>
     {{/if}}

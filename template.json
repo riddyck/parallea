@@ -607,7 +607,32 @@
       "attributs":{
         "boost": {
           "value": 45,
-          "charac": "str",
+          "charac": {
+            "str":{
+              "label":"Force",
+              "display":true
+            },
+            "dex":{
+              "label":"Dexterité",
+              "display":true
+            },
+            "arc":{
+              "label":"Arcane",
+              "display":true
+            },
+            "wis":{
+              "label":"Sagesse",
+              "display":true
+            },
+            "per":{
+              "label":"Perception",
+              "display":true
+            },
+            "cha":{
+              "label":"Charisme",
+              "display":true
+            }
+          },
           "display": true
         },
         "level":1
